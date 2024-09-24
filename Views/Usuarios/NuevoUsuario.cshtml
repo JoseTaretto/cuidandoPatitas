@@ -1,0 +1,28 @@
+﻿@model ModelUsuarios
+
+@{
+    ViewData["Title"] = "NuevoUsuario";
+}
+
+<h1>NuevoUsuario</h1>
+
+<form asp-action="guardar" asp-controller ="Usuarios" method="post">
+      <div class="mb-3 row">
+       <label for="staticName" class="col-sm-2 col-form-label">User name</label>
+    <div class="col-sm-10">
+      <input asp-for="UsuarioUserName" type="text" readonly class="form-control-plaintext" id="staticName" value="jose">
+    </div>
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input asp-for="UsuarioUserName" type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Registrarse</button>
+</form>
+

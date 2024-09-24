@@ -46,14 +46,51 @@ namespace AppCuidandoPatitas.Datos
                             UserBaja = Convert.ToInt32(dr["USER_ALTA"])
 
                         });
+
                     }
                 }
                 return listaUsuarios;
             }
         }
 
+        public bool guardar(ModelUsuarios objUsuarios)
+        {
+            bool respuesta;
 
+            try
+            {
+                var con = new Conexion();
+                var conexcion = new SqlConnection(con.getCadenaSQL());
 
+                {
+                    conexcion.Open();
+                    SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);
+                    cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
+                    cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
+                    cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
+                    cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
+                    cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
+                    cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoId);
+                    cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
+                    cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);
+                    cmd.Parameters.AddWithValue("USUARIO_TELEFONO_1", objUsuarios.UsuarioTelefono1);
+                    cmd.Parameters.AddWithValue("USUARIO_TELEFONO_2", objUsuarios.UsuarioTelefono2);
+                    cmd.Parameters.AddWithValue("USUARIO_DIRECCION", objUsuarios.UsuarioDireccion);
+                    cmd.Parameters.AddWithValue("LOCALIDAD", objUsuarios.LocalidadId);
+                    cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);
+                    cmd.Parameters.AddWithValue("USER_ALTA", objUsuarios.UserAlta);
+                }
 
+                respuesta = true;
+
+            }
+            catch (Exception)
+            {
+                respuesta=false;
+            }
+
+            return respuesta;
+
+        }
     }
 }
