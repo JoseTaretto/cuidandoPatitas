@@ -5,6 +5,7 @@
         // Atributos privados
         private int _usuario_id;
         private string _usuario_user_name;
+        private string _usuario_password;
         private string _usuario_rol;
         private string _usuario_nombre;
         private string _usuario_apellido;
@@ -29,6 +30,7 @@
         // Propiedades Publicas
         public int UsuarioId { get => _usuario_id; set => _usuario_id = value; }
         public string UsuarioUserName { get => _usuario_user_name; set => _usuario_user_name = value; }
+        public string UsuarioPassword { get => _usuario_password; set => _usuario_password = value; }
         public string UsuarioRol { get => _usuario_rol; set => _usuario_rol = value; }
         public string UsuarioNombre { get => _usuario_nombre; set => _usuario_nombre = value; }
         public string UsuarioApellido { get => _usuario_apellido; set => _usuario_apellido = value; }

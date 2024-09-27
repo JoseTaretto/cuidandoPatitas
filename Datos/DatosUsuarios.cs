@@ -26,6 +26,7 @@ namespace AppCuidandoPatitas.Datos
                             UsuarioId = Convert.ToInt32(dr["USER_ID"]),
                             UsuarioUserName = dr["USER_NAME"].ToString(),
                             UsuarioRol = dr["USUARIO_ROL"].ToString(),
+                            UsuarioPassword = dr["USUARIO_PASSWORD"].ToString(),
                             UsuarioNombre = dr["USUARIO_NOMBRE"].ToString(),
                             UsuarioApellido = dr["USUARIO_APELLIDO"].ToString(),
                             UsuarioFechaNacimiento = Convert.ToDateTime(dr["USUARIO_FECHA_NACIMIENTO"]),
@@ -66,6 +67,7 @@ namespace AppCuidandoPatitas.Datos
                     conexcion.Open();
                     SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
+                    cmd.Parameters.AddWithValue("USAURIO_PASSWORD", objUsuarios.UsuarioPassword);
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
