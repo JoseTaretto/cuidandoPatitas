@@ -66,8 +66,10 @@ namespace AppCuidandoPatitas.Datos
                 {
                     conexcion.Open();
                     SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);
+                    
+
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
-                    cmd.Parameters.AddWithValue("USAURIO_PASSWORD", objUsuarios.UsuarioPassword);
+                    cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
@@ -81,6 +83,11 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("LOCALIDAD", objUsuarios.LocalidadId);
                     cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);
                     cmd.Parameters.AddWithValue("USER_ALTA", objUsuarios.UserAlta);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+
+                    Console.WriteLine("datos enviados");
                 }
 
                 respuesta = true;
@@ -88,7 +95,7 @@ namespace AppCuidandoPatitas.Datos
             }
             catch (Exception)
             {
-                respuesta=false;
+                respuesta = false;
             }
 
             return respuesta;

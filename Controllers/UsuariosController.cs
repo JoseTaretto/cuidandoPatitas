@@ -23,13 +23,17 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult GuardarUsuario(ModelUsuarios objUsuario)
         {
+
+
             var respuesta = DatosUsuarios.guardar(objUsuario);
-            if(respuesta == null)
+
+            if(respuesta == true)
             {
                 return RedirectToAction("listarUsuarios");
             }
             else
             {
+                Console.WriteLine("error");
                 return View();
             }
         }
