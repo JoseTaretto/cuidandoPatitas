@@ -1,7 +1,10 @@
 ﻿using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-
+<<<<<<< HEAD
+using Microsoft.CodeAnalysis;
+=======
+>>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
 
 namespace AppCuidandoPatitas.Datos
 {
@@ -23,14 +26,14 @@ namespace AppCuidandoPatitas.Datos
                     {
                         listaUsuarios.Add(new ModelUsuarios()
                         {
-                            UsuarioId = Convert.ToInt32(dr["USER_ID"]),
+                            UsuarioID = Convert.ToInt32(dr["USER_ID"]),
                             UsuarioUserName = dr["USER_NAME"].ToString(),
                             UsuarioRol = dr["USUARIO_ROL"].ToString(),
                             UsuarioPassword = dr["USUARIO_PASSWORD"].ToString(),
                             UsuarioNombre = dr["USUARIO_NOMBRE"].ToString(),
                             UsuarioApellido = dr["USUARIO_APELLIDO"].ToString(),
                             UsuarioFechaNacimiento = Convert.ToDateTime(dr["USUARIO_FECHA_NACIMIENTO"]),
-                            DocumentoId = Convert.ToInt32(dr["DOCUMENTO_ID"]),
+                            DocumentoID = Convert.ToInt32(dr["DOCUMENTO_ID"]),
                             UsuarioDocumento = dr["USUARIO_DOCUMENTO"].ToString(),
                             UsuarioEmail = dr["USUARIO_EMAIL"].ToString(),
                             UsuarioTelefono1 = dr["USUARIO_TELEFONO_1"].ToString(),
@@ -45,14 +48,12 @@ namespace AppCuidandoPatitas.Datos
                             UserModificacion= Convert.ToInt32(dr["USER_MODIFICACION"]),
                             FechaBaja = Convert.ToDateTime(dr["FECHA_ALTA"]),
                             UserBaja = Convert.ToInt32(dr["USER_ALTA"])
-
                         });
-
                     }
                 }
                 return listaUsuarios;
             }
-        }
+       }
 
         public bool guardar(ModelUsuarios objUsuarios)
         {
@@ -65,16 +66,19 @@ namespace AppCuidandoPatitas.Datos
 
                 {
                     conexcion.Open();
-                    SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);
-                    
+                    SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);                    
 
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
                     cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
+<<<<<<< HEAD
+                    cmd.Parameters.AddWithValue("USUARIO_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
+=======
                     cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
-                    cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoId);
+>>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
+                    cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoID);
                     cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
                     cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);
                     cmd.Parameters.AddWithValue("USUARIO_TELEFONO_1", objUsuarios.UsuarioTelefono1);
@@ -82,24 +86,57 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("USUARIO_DIRECCION", objUsuarios.UsuarioDireccion);
                     cmd.Parameters.AddWithValue("LOCALIDAD", objUsuarios.LocalidadId);
                     cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);
-                    cmd.Parameters.AddWithValue("USER_ALTA", objUsuarios.UserAlta);
-
+                   
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-
-                    Console.WriteLine("datos enviados");
+                    cmd.ExecuteNonQuery();                   
                 }
 
                 respuesta = true;
 
             }
-            catch (Exception)
+            catch (Exception x)
             {
                 respuesta = false;
+                Console.WriteLine(x);
             }
 
             return respuesta;
 
+        }
+
+        public ModelUsuarios obtenerUsuario(int id)
+        {
+            try
+            {
+                var usuario = new ModelUsuarios();
+                var con = new Conexion();
+                var conexcion = new SqlConnection(con.getCadenaSQL());
+
+                {
+                    conexcion.Open();
+                    SqlCommand cmd = new SqlCommand("TraerUsuarioPorID", conexcion);
+                    cmd.Parameters.AddWithValue("@USER_ID", id);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    var dr = cmd.ExecuteReader();
+
+                    {
+                        if (dr.Read())
+                        {
+                            usuario.UsuarioUserName = dr["USER_NAME"].ToString();
+
+                        }
+                    }
+
+                    return usuario;                    
+                }
+            }
+
+            catch (Exception x)
+            {
+                Console.WriteLine(x.Message);
+                return null;
+            }
         }
     }
 }

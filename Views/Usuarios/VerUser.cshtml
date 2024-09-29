@@ -1,0 +1,33 @@
+﻿@model AppCuidandoPatitas.Models.ModelUsuarios
+
+
+@{
+    ViewData["Title"] = "Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Asegúrate de que este sea el layout que estás utilizando, si aplica
+}
+
+<h2>Editar Usuario</h2>
+
+<div class="container mt-4">
+    <form asp-action="GuardarCambios" asp-controller="Usuarios" method="post">
+        <div class="form-group">
+            <label for="UsuarioUserName">Nombre</label>
+            <input type="text" class="form-control" id="UsuarioUserName" name="UsuarioUserName" value="@Model.UsuarioUserName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="UsuarioRol">Rol de Usuario</label>
+            <input type="text" class="form-control" id="UsuarioRol" name="UsuarioRol" value="@Model.UsuarioRol" required />
+        </div>
+
+
+        <div class="form-group">
+            <label for="UsuarioApellido">Apellido</label>
+            <input type="text" class="form-control" id="UsuarioApellido" name="UsuarioApellido" value="@Model.UsuarioApellido" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+
+        <a asp-action="ListarUsuarios" asp-controller="Usuarios" class="btn btn-secondary mt-3">Cancelar</a>
+    </form>
+</div>

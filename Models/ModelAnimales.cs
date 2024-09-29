@@ -1,6 +1,8 @@
-﻿namespace AppCuidandoPatitas.Models
+﻿using AppCuidandoPatitas.Interface;
+
+namespace AppCuidandoPatitas.Models
 {
-    public class ModelAnimales
+    public class ModelAnimales : IDocumento
     {
         private int _animal_id;
         private int _especie_id;
@@ -9,6 +11,9 @@
         private char _animal_sexo;
         private int _animal_edad;
         private DateTime _animal_fecha_nacimiento;
+        private int _documento_id;
+        private string _documento_nombre;
+        private string _animal_documento;
         private decimal _animal_peso;
         private int _animal_castrado;
         private string _animal_descripcion;
@@ -26,6 +31,9 @@
         public char AnimalSexo { get => _animal_sexo; set => _animal_sexo = value; }
         public int AnimalEdad { get => _animal_edad; set => _animal_edad = value; }
         public DateTime AnimalFechaNacimiento { get => _animal_fecha_nacimiento; set => _animal_fecha_nacimiento = value; }
+        public int DocumentoID { get => _documento_id; set => _documento_id = value; }
+        public string DocumentoNombre { get => _documento_nombre; set => _documento_nombre = value; }
+        public string AnimalDocumento{ get => _animal_documento; set => _animal_documento = value; }
         public decimal AnimalPeso { get => _animal_peso; set => _animal_peso = value; }
         public int AnimalCastrado { get => _animal_castrado; set => _animal_castrado = value; }
         public string AnimalDescripcion { get => _animal_descripcion; set => _animal_descripcion = value; }
