@@ -7,44 +7,45 @@
 <h1>Nuevo Usuario</h1>
 
 <form asp-action="GuardarUsuario" asp-controller="Usuarios" method="post">
+
     <div class="mb-3">
         <label for="userName" class="form-label">Nombre de Usuario</label>
-        <input asp-for="UsuarioUserName" type="text" class="form-control" id="userName" placeholder="Ingresa tu nombre de usuario" value="Pepon" required>
+        <input asp-for="UsuarioUserName" type="text" class="form-control" id="userName" placeholder="Ingresa tu nombre de usuario" required>
     </div>
 
     <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input asp-for="UsuarioPassword" type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" value="Pepon" required>
+        <input asp-for="UsuarioPassword" type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña"  required>
     </div>
 
     <div class="mb-3">
         <label for="rol" class="form-label">Rol</label>
-        <input asp-for="UsuarioRol" type="text" class="form-control" id="rol" placeholder="Ingresa tu rol" value="ADMIN">
+        <input asp-for="UsuarioRol" type="text" class="form-control" id="rol" placeholder="Ingresa tu rol">
     </div>
 
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input asp-for="UsuarioNombre" type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" value="Pepon">
+        <input asp-for="UsuarioNombre" type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
     </div>
 
     <div class="mb-3">
         <label for="apellido" class="form-label">Apellido</label>
-        <input asp-for="UsuarioApellido" type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" value="Pepito">
+        <input asp-for="UsuarioApellido" type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido">
     </div>
 
     <div class="mb-3">
         <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-        <input asp-for="UsuarioFechaNacimiento" type="date" class="form-control" id="fechaNacimiento" value="2004-09-26">
+        <input asp-for="UsuarioFechaNacimiento" type="date" class="form-control" id="fechaNacimiento">
     </div>
 
     <div class="mb-3">
         <label for="documentoId" class="form-label">Tipo de Documento</label>
-        <input asp-for="DocumentoId" type="text" class="form-control" id="documentoId" placeholder="Ingrese el tipo de documento" value="123123">
+        <input asp-for="DocumentoID" type="text" class="form-control" id="documentoId" placeholder="Ingrese el tipo de documento">
     </div>
 
     <div class="mb-3">
         <label for="documento" class="form-label">Número de Documento</label>
-        <input asp-for="UsuarioDocumento" type="text" class="form-control" id="documento" placeholder="Ingrese su número de documento" value="123123">
+        <input asp-for="UsuarioDocumento" type="text" class="form-control" id="documento" placeholder="Ingrese su número de documento" required>
     </div>
 
     <div class="mb-3">
@@ -54,27 +55,27 @@
 
     <div class="mb-3">
         <label for="telefono1" class="form-label">Teléfono 1</label>
-        <input asp-for="UsuarioTelefono1" type="tel" class="form-control" id="telefono1" placeholder="Ingrese su primer teléfono" value="123">
+        <input asp-for="UsuarioTelefono1" type="tel" class="form-control" id="telefono1" placeholder="Ingrese su primer teléfono">
     </div>
 
     <div class="mb-3">
         <label for="telefono2" class="form-label">Teléfono 2</label>
-        <input asp-for="UsuarioTelefono2" type="tel" class="form-control" id="telefono2" placeholder="Ingrese su segundo teléfono" value="123123">
+        <input asp-for="UsuarioTelefono2" type="tel" class="form-control" id="telefono2" placeholder="Ingrese su segundo teléfono">
     </div>
 
     <div class="mb-3">
         <label for="direccion" class="form-label">Dirección</label>
-        <input asp-for="UsuarioDireccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección" value="Calle falsa">
+        <input asp-for="UsuarioDireccion" type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección">
     </div>
 
     <div class="mb-3">
         <label for="localidad" class="form-label">Localidad</label>
-        <input asp-for="LocalidadId" type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad" value="springfield">
+        <input asp-for="LocalidadId" type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad">
     </div>
 
     <div class="mb-3">
         <label for="provincia" class="form-label">Provincia</label>
-        <input asp-for="ProvinciaId" type="text" class="form-control" id="provincia" placeholder="Ingrese su provincia" value="Arizona">
+        <input asp-for="ProvinciaId" type="text" class="form-control" id="provincia" placeholder="Ingrese su provincia">
     </div>
 
     <button type="submit" class="btn btn-primary">Registrarse</button>

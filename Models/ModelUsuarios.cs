@@ -1,6 +1,8 @@
-﻿namespace AppCuidandoPatitas.Models
+﻿using AppCuidandoPatitas.Interface;
+
+namespace AppCuidandoPatitas.Models
 {
-    public class ModelUsuarios
+    public class ModelUsuarios : IDocumento
     {
         // Atributos privados
         private int _usuario_id;
@@ -11,6 +13,7 @@
         private string _usuario_apellido;
         private DateTime _usuario_fecha_nacimiento;
         private int _documento_id;
+        private string _documento_nombre;
         private string _usuario_documento;
         private string _usuario_email;
         private string _usuario_telefono_1;
@@ -28,14 +31,15 @@
 
 
         // Propiedades Publicas
-        public int UsuarioId { get => _usuario_id; set => _usuario_id = value; }
+        public int UsuarioID { get => _usuario_id; set => _usuario_id = value; }
         public string UsuarioUserName { get => _usuario_user_name; set => _usuario_user_name = value; }
         public string UsuarioPassword { get => _usuario_password; set => _usuario_password = value; }
         public string UsuarioRol { get => _usuario_rol; set => _usuario_rol = value; }
         public string UsuarioNombre { get => _usuario_nombre; set => _usuario_nombre = value; }
         public string UsuarioApellido { get => _usuario_apellido; set => _usuario_apellido = value; }
         public DateTime UsuarioFechaNacimiento { get => _usuario_fecha_nacimiento; set => _usuario_fecha_nacimiento = value; }
-        public int DocumentoId { get => _documento_id; set => _documento_id = value; }
+        public int DocumentoID { get => _documento_id; set => _documento_id = value; }
+        public string DocumentoNombre { get => _documento_nombre; set => _documento_nombre = value; }
         public string UsuarioDocumento { get => _usuario_documento; set => _usuario_documento = value; }
         public string UsuarioEmail { get => _usuario_email; set => _usuario_email = value; }
         public string UsuarioTelefono1 { get => _usuario_telefono_1; set => _usuario_telefono_1 = value; }
