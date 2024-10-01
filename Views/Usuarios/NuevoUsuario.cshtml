@@ -36,34 +36,26 @@
     <div class="mb-3">
         <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
         <input asp-for="UsuarioFechaNacimiento" type="date" class="form-control" id="fechaNacimiento">
-<<<<<<< HEAD
-=======
     </div>
 
     <div class="mb-3">
         <label for="documentoId" class="form-label">Tipo de Documento</label>
         <input asp-for="DocumentoID" type="text" class="form-control" id="documentoId" placeholder="Ingrese el tipo de documento">
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
     </div>
 
     <div class="mb-3">
         <label for="documento" class="form-label">Número de Documento</label>
-<<<<<<< HEAD
         <select asp-for="DocumentoID" class="form-select" id="documento" placeholder="Ingrese su número de documento" required> 
         <option value="1">dni</option>
         <option value="2">cuit</option>
         <option value="3">otros</option>
         </select>
-=======
-        <input asp-for="UsuarioDocumento" type="text" class="form-control" id="documento" placeholder="Ingrese su número de documento" required>
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
     </div>
 
     <div class="mb-3">
         <label for="documentoId" class="form-label">Tipo de Documento</label>
-        <input asp-for="UsuarioDocumento" type="text" class="form-control" id="documentoId" placeholder="Ingrese el tipo de documento">
+        <input asp-for="UsuarioDocumento" type="text" class="form-control" id="documentoId" placeholder="Ingrese el tipo de documento" required>
     </div>
-
 
 
     <div class="mb-3">
@@ -88,28 +80,19 @@
 
     <div class="mb-3">
         <label for="localidad" class="form-label">Localidad</label>
-<<<<<<< HEAD
         <select asp-for="LocalidadId" class="form-select" class="form-control" id="localidad" placeholder="Ingrese su localidad"> 
         <option value="1">Ituzaingo</option>
         <option value="2">Morón</option>
         <option value="3">Moreno</option>
         </select>
-=======
-        <input asp-for="LocalidadId" type="text" class="form-control" id="localidad" placeholder="Ingrese su localidad">
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
     </div>
 
     <div class="mb-3">
         <label for="provincia" class="form-label">Provincia</label>
-<<<<<<< HEAD
         <select asp-for="ProvinciaId" type="text" class="form-select" id="provincia" placeholder="Ingrese su provincia"> 
         <option value="1">CAPITAL FEDERAL</option>
         <option value="2">BUENOS AIRES</option>
         </select>
-
-=======
-        <input asp-for="ProvinciaId" type="text" class="form-control" id="provincia" placeholder="Ingrese su provincia">
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
     </div>
 
     <button type="submit" class="btn btn-primary">Registrarse</button>

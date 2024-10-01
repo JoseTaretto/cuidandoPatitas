@@ -10,10 +10,5 @@
             DocumentoHumano = 1,
             DocumentoAnimal = 2
         }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
     }
 }

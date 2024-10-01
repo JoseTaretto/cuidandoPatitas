@@ -1,10 +1,7 @@
 ﻿using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-<<<<<<< HEAD
 using Microsoft.CodeAnalysis;
-=======
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
 
 namespace AppCuidandoPatitas.Datos
 {
@@ -73,11 +70,8 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
-<<<<<<< HEAD
                     cmd.Parameters.AddWithValue("USUARIO_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
-=======
                     cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoID);
                     cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
                     cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);
@@ -85,8 +79,7 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("USUARIO_TELEFONO_2", objUsuarios.UsuarioTelefono2);
                     cmd.Parameters.AddWithValue("USUARIO_DIRECCION", objUsuarios.UsuarioDireccion);
                     cmd.Parameters.AddWithValue("LOCALIDAD", objUsuarios.LocalidadId);
-                    cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);
-                   
+                    cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);                   
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();                   
                 }
@@ -108,7 +101,7 @@ namespace AppCuidandoPatitas.Datos
         {
             try
             {
-                var usuario = new ModelUsuarios();
+                var objUsuario = new ModelUsuarios();
                 var con = new Conexion();
                 var conexcion = new SqlConnection(con.getCadenaSQL());
 
@@ -123,12 +116,33 @@ namespace AppCuidandoPatitas.Datos
                     {
                         if (dr.Read())
                         {
-                            usuario.UsuarioUserName = dr["USER_NAME"].ToString();
+                            objUsuario.UsuarioID = Convert.ToInt32(dr["USER_ID"]);
+                            objUsuario.UsuarioUserName = dr["USER_NAME"].ToString();
+                            objUsuario.UsuarioRol = dr["USUARIO_ROL"].ToString();
+                            objUsuario.UsuarioPassword = dr["USUARIO_PASSWORD"].ToString();
+                            objUsuario.UsuarioNombre = dr["USUARIO_NOMBRE"].ToString();
+                            objUsuario.UsuarioApellido = dr["USUARIO_APELLIDO"].ToString();
+                            objUsuario.UsuarioFechaNacimiento = Convert.ToDateTime(dr["USUARIO_FECHA_NACIMIENTO"]);
+                            objUsuario.DocumentoID = Convert.ToInt32(dr["DOCUMENTO_ID"]);
+                            objUsuario.UsuarioDocumento = dr["USUARIO_DOCUMENTO"].ToString();
+                            objUsuario.UsuarioEmail = dr["USUARIO_EMAIL"].ToString();
+                            objUsuario.UsuarioTelefono1 = dr["USUARIO_TELEFONO_1"].ToString();
+                            objUsuario.UsuarioTelefono2 = dr["USUARIO_TELEFONO_2"].ToString();
+                            objUsuario.UsuarioDireccion = dr["USUARIO_DIRECCION"].ToString();
+                            objUsuario.LocalidadId = Convert.ToInt32(dr["LOCALIDAD"]);
+                            objUsuario.ProvinciaId = Convert.ToInt32(dr["PROVINCIA_ID"]);
+                            objUsuario.UsuarioActivo = Convert.ToInt32(dr["USUARIO_ACTIVO"]);
+                            objUsuario.FechaAlta = Convert.ToDateTime(dr["FECHA_ALTA"]);
+                            objUsuario.UserAlta = Convert.ToInt32(dr["USER_ALTA"]);
+                            objUsuario.FechaModificacion = Convert.ToDateTime(dr["FECHA_MODIFICACION"]);
+                            objUsuario.UserModificacion = Convert.ToInt32(dr["USER_MODIFICACION"]);
+                            objUsuario.FechaBaja = Convert.ToDateTime(dr["FECHA_ALTA"]);
+                            objUsuario.UserBaja = Convert.ToInt32(dr["USER_ALTA"]);
 
                         }
                     }
 
-                    return usuario;                    
+                    return objUsuario;                    
                 }
             }
 

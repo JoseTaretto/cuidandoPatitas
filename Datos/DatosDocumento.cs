@@ -15,10 +15,7 @@ namespace AppCuidandoPatitas.Datos
             {
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("TraerListaDocumentos", conexion);
-<<<<<<< HEAD
-=======
                 cmd.Parameters.AddWithValue("DOCUMENTO_TIPO", tipoDocumento);
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 var dr = cmd.ExecuteReader();
@@ -27,15 +24,8 @@ namespace AppCuidandoPatitas.Datos
                     {
                         listaDocumentos.Add(new ModelDocumento()
                         {
-<<<<<<< HEAD
-                            DocumentoID = Convert.ToInt32(dr["USER_ID"]),
-                            DocumentoNombre = dr["USER_NAME"].ToString(),
-                          
-=======
                             DocumentoID = Convert.ToInt32(dr["DOCUMENTO_ID"]),
-                            DocumentoNombre = dr["DOCUMENTO_NOMBRE"].ToString(),                         
->>>>>>> baf329ca6056ce3f0de58f336b37fcd617d22962
-
+                            DocumentoNombre = dr["DOCUMENTO_NOMBRE"].ToString()   
                         });
 
                     }
@@ -43,8 +33,6 @@ namespace AppCuidandoPatitas.Datos
                 return listaDocumentos;
             }
         }
-
-
 
     }
 }
