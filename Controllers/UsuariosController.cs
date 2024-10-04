@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
 using AppCuidandoPatitas.Models;
-using System.Reflection;
+
 
 namespace AppCuidandoPatitas.Controllers
 {
@@ -51,6 +51,24 @@ namespace AppCuidandoPatitas.Controllers
             {
                 Console.WriteLine("error");
                 return View();
+            }
+        }
+
+        public IActionResult desactivarUser(int id, int baja)
+        {
+            var usuario = DatosUsuarios.desactivarUsuario(id, baja);
+            {
+                if(usuario != 0)
+                {
+                    TempData["Mensaje"] = "Usuario dado de baja";
+                }
+                else
+                {
+                    TempData["Mensaje"] = "No existe el usuario";
+                   
+                }
+
+                return View("listarUsuarios");
             }
         }
 

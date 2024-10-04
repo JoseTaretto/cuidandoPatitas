@@ -32,9 +32,21 @@
                         <button type="submit" class="btn btn-success"><span class="material-symbols-outlined">edit</span></button>
                         </form>
                     </td>
-                    <td><button type="button" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></button></td>
+                    <td>
+                        <form asp-controller="Usuarios" asp-action="desactivarUser">
+                        <input type="hidden" name="id" value="@item.UsuarioID" />
+                        <input type="hidden" name="id" value="@item.UserBaja" />
+                        <button type="submit" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></button>
+                        </form>
+                    </td>
                 </div>
                 </tr>
+            }
+            @if (TempData["Mensaje"] != null)
+            {
+        <script>
+            alert('@TempData["Mensaje"]');
+        </script>
             }
     </tbody>
 </table>
