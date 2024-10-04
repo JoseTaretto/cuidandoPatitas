@@ -97,6 +97,35 @@ namespace AppCuidandoPatitas.Datos
 
         }
 
+        public int desactivarUsuario(int id, int baja)
+        {
+            try
+            {
+                var objUsuario = new ModelUsuarios();
+                var con = new Conexion();
+                var conexcion = new SqlConnection(con.getCadenaSQL());
+
+                {
+                    conexcion.Open();
+                    SqlCommand cmd = new SqlCommand("EliminarUsuario", conexcion);
+                    cmd.Parameters.AddWithValue("@USER_ID", id);
+                    cmd.Parameters.AddWithValue("@USER_BAJA", baja);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected;
+                }
+
+                
+            }
+            catch (Exception x)
+            {
+                Console.WriteLine(x.Message);
+                return 0;
+            }
+        }
+
         public ModelUsuarios obtenerUsuario(int id)
         {
             try
