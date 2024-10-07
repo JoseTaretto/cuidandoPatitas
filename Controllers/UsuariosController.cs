@@ -72,5 +72,21 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        public IActionResult editarUsuario(ModelUsuarios objUsuario, int id)
+        {
+
+            var respuesta = DatosUsuarios.editar(objUsuario, id);
+
+            if (respuesta == true)
+            {
+                return RedirectToAction("editarUsuarios");
+            }
+            else
+            {
+                Console.WriteLine("error");
+                return View();
+            }
+        }
+
     }
 }

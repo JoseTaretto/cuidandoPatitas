@@ -181,5 +181,51 @@ namespace AppCuidandoPatitas.Datos
                 return null;
             }
         }
+
+        public bool editar(ModelUsuarios objUsuarios, int id)
+        {
+            bool respuesta;
+
+            try
+            {
+                var con = new Conexion();
+                var conexcion = new SqlConnection(con.getCadenaSQL());
+
+                {
+                    conexcion.Open();
+                    SqlCommand cmd = new SqlCommand("editarUsuario", conexcion);
+
+                    cmd.Parameters.AddWithValue("@USER_ID", id);
+                    cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
+                    cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
+                    cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);
+                    cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
+                    cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
+                    cmd.Parameters.AddWithValue("USUARIO_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
+                    cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
+                    cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoID);
+                    cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
+                    cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);
+                    cmd.Parameters.AddWithValue("USUARIO_TELEFONO_1", objUsuarios.UsuarioTelefono1);
+                    cmd.Parameters.AddWithValue("USUARIO_TELEFONO_2", objUsuarios.UsuarioTelefono2);
+                    cmd.Parameters.AddWithValue("USUARIO_DIRECCION", objUsuarios.UsuarioDireccion);
+                    cmd.Parameters.AddWithValue("LOCALIDAD", objUsuarios.LocalidadId);
+                    cmd.Parameters.AddWithValue("PROVINCIA_ID", objUsuarios.ProvinciaId);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+
+                respuesta = true;
+
+            }
+            catch (Exception x)
+            {
+                respuesta = false;
+                Console.WriteLine(x);
+            }
+
+            return respuesta;
+
+        }
     }
 }
