@@ -48,9 +48,10 @@ namespace AppCuidandoPatitas.Datos
                         });
                     }
                 }
-                return listaUsuarios;
+                
             }
-       }
+            return listaUsuarios;
+        }
 
         public bool guardar(ModelUsuarios objUsuarios)
         {
@@ -71,7 +72,6 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
                     cmd.Parameters.AddWithValue("USUARIO_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
-                    cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoID);
                     cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
                     cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);
@@ -193,7 +193,7 @@ namespace AppCuidandoPatitas.Datos
 
                 {
                     conexcion.Open();
-                    SqlCommand cmd = new SqlCommand("editarUsuario", conexcion);
+                    SqlCommand cmd = new SqlCommand("ModificarUsuario", conexcion);
 
                     cmd.Parameters.AddWithValue("@USER_ID", objUsuarios.UsuarioID);
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
@@ -202,7 +202,6 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("USUARIO_NOMBRE", objUsuarios.UsuarioNombre);
                     cmd.Parameters.AddWithValue("USUARIO_APELLIDO", objUsuarios.UsuarioApellido);
                     cmd.Parameters.AddWithValue("USUARIO_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
-                    cmd.Parameters.AddWithValue("USER_FECHA_NACIMIENTO", objUsuarios.UsuarioFechaNacimiento);
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objUsuarios.DocumentoID);
                     cmd.Parameters.AddWithValue("USUARIO_DOCUMENTO", objUsuarios.UsuarioDocumento);
                     cmd.Parameters.AddWithValue("USUARIO_EMAIL", objUsuarios.UsuarioEmail);

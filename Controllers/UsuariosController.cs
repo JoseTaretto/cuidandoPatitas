@@ -61,12 +61,12 @@ namespace AppCuidandoPatitas.Controllers
                 if(usuario != 0)
                 {
                     TempData["Mensaje"] = "Usuario dado de baja";
-                    return View("listarUsuarios");
+                    return RedirectToAction("listarUsuarios");
                 }
                 else
                 {
                     TempData["Mensaje"] = "No existe el usuario";
-                    return View("listarUsuarios");
+                    return RedirectToAction("listarUsuarios");
 
                 }
 
