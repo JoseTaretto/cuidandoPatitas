@@ -163,7 +163,7 @@ a:focus {
 /*end header section*/
 /* slider section */
 .slider_section {
-  background-image: url(../images/hero.jpg);
+  background-image: url(../images/heroN.jpg);
   padding: 6% 0;
   background-size: cover;
   background-repeat: no-repeat;
@@ -177,11 +177,11 @@ a:focus {
 
 .slider_detail-box h1 {
   color: #ffffff;
-  font-size: 10px;
+  font-size: 30px;
 }
 
 .slider_detail-box h1 span {
-  display: inline-block;
+  display: block;
   color: #434242;
   font-weight: bold;
 }
