@@ -72,10 +72,10 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
-        public IActionResult editarUsuario(ModelUsuarios objUsuario, int id)
+        public IActionResult editarUsuario(ModelUsuarios objUsuario)
         {
 
-            var respuesta = DatosUsuarios.editar(objUsuario, id);
+            var respuesta = DatosUsuarios.editar(objUsuario);
 
             if (respuesta == true)
             {
@@ -88,5 +88,21 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        public IActionResult EditarUsuarioView(int id)
+        {
+
+            var usuario = DatosUsuarios.obtenerUsuario(id);
+
+            if (usuario != null)
+            {
+                Console.WriteLine($"ID del Usuario: {id}");
+                return View("EditarUsuarioView", usuario);
+            }
+            else
+            {
+                Console.WriteLine("error");
+                return View();
+            }
+        }
     }
 }

@@ -182,7 +182,7 @@ namespace AppCuidandoPatitas.Datos
             }
         }
 
-        public bool editar(ModelUsuarios objUsuarios, int id)
+        public bool editar(ModelUsuarios objUsuarios)
         {
             bool respuesta;
 
@@ -195,7 +195,7 @@ namespace AppCuidandoPatitas.Datos
                     conexcion.Open();
                     SqlCommand cmd = new SqlCommand("editarUsuario", conexcion);
 
-                    cmd.Parameters.AddWithValue("@USER_ID", id);
+                    cmd.Parameters.AddWithValue("@USER_ID", objUsuarios.UsuarioID);
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
                     cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);

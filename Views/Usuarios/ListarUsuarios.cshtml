@@ -25,9 +25,16 @@
                     <td>@item.UsuarioNombre</td>
                     <td>@item.UsuarioApellido</td>
                 <div>
-                    <td><button type="button" class="btn btn-primary"><span class="material-symbols-outlined">visibility</span></button></td>
+     
+                       <td>
+                            <form asp-controller="Usuarios" asp-action="TraerUsuario">
+                            <input type="hidden" name="id" value="@item.UsuarioID" />
+                                <button type="submit" class="btn btn-success"><span class="material-symbols-outlined">visibility</span></button>
+                            </form>
+                        </td>
+
                     <td>
-                        <form asp-controller="Usuarios" asp-action="TraerUsuario">
+                            <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
                         <input type="hidden" name="id" value="@item.UsuarioID" />
                         <button type="submit" class="btn btn-success"><span class="material-symbols-outlined">edit</span></button>
                         </form>
