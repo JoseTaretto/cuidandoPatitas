@@ -1,4 +1,6 @@
 ﻿@model ModelUsuarios
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authentication.Cookies;
 
 @{
     ViewData["Title"] = "EDITAR USUARIO";
@@ -9,7 +11,7 @@
 
 <div class="card">
 
-    <form asp-action="EditarUsuario" asp-controller="Usuarios" method="post">
+    <form asp-action="Editar" asp-controller="Usuarios" method="post">
 
         <input asp-for="UsuarioID" type="hidden" class="form-control">
 

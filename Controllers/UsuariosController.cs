@@ -21,11 +21,10 @@ namespace AppCuidandoPatitas.Controllers
         }
 
         [HttpPost]
-
         public IActionResult GuardarUsuario(ModelUsuarios objUsuario)
         {
 
-            var respuesta = DatosUsuarios.guardar(objUsuario);
+            var respuesta = DatosUsuarios.Guardar(objUsuario);
 
             if(respuesta == true)
             {
@@ -40,7 +39,7 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult TraerUsuario(int id) {
 
-            var usuario = DatosUsuarios.obtenerUsuario(id);
+            var usuario = DatosUsuarios.TraerUno(id);
 
             if (usuario != null)
             {
@@ -56,7 +55,7 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult desactivarUser(int id, int baja)
         {
-            var usuario = DatosUsuarios.desactivarUsuario(id, baja);
+            var usuario = DatosUsuarios.Baja(id, baja);
             {
                 if(usuario != 0)
                 {
@@ -73,10 +72,11 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        [HttpPost]
         public IActionResult editarUsuario(ModelUsuarios objUsuario)
         {
 
-            var respuesta = DatosUsuarios.editar(objUsuario);
+            var respuesta = DatosUsuarios.Editar(objUsuario);
 
             if (respuesta == true)
             {
@@ -92,7 +92,7 @@ namespace AppCuidandoPatitas.Controllers
         public IActionResult EditarUsuarioView(int id)
         {
 
-            var usuario = DatosUsuarios.obtenerUsuario(id);
+            var usuario = DatosUsuarios.TraerUno(id);
 
             if (usuario != null)
             {

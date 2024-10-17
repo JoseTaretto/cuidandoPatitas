@@ -53,7 +53,12 @@ namespace AppCuidandoPatitas.Datos
             return listaUsuarios;
         }
 
-        public bool guardar(ModelUsuarios objUsuarios)
+        public ModelUsuarios ValidarUsuario(string usuario, string password)
+        {
+            return Listar().Where(item => item.UsuarioUserName == usuario && item.UsuarioPassword == password).FirstOrDefault();
+        }
+
+        public bool Guardar(ModelUsuarios objUsuarios)
         {
             bool respuesta;
 
@@ -97,7 +102,7 @@ namespace AppCuidandoPatitas.Datos
 
         }
 
-        public int desactivarUsuario(int id, int baja)
+        public int Baja(int id, int baja)
         {
             try
             {
@@ -126,7 +131,7 @@ namespace AppCuidandoPatitas.Datos
             }
         }
 
-        public ModelUsuarios obtenerUsuario(int id)
+        public ModelUsuarios TraerUno(int id)
         {
             try
             {
@@ -182,7 +187,7 @@ namespace AppCuidandoPatitas.Datos
             }
         }
 
-        public bool editar(ModelUsuarios objUsuarios)
+        public bool Editar(ModelUsuarios objUsuarios)
         {
             bool respuesta;
 

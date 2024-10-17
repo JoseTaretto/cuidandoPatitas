@@ -16,7 +16,12 @@ namespace AppCuidandoPatitas.Controllers
         public IActionResult Index()
         {
             return View();
-        }       
+        }     
+        
+        public IActionResult IndexLogIn()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,4 +1,15 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    // Direccion del login
+    option.LoginPath = "/Home/IndexLogIn";
+    //Vencimiento del tiempo de Sesion
+    option.ExpireTimeSpan = TimeSpan.FromHours(12);
+    // Al no tener acceso a una vista redirigo al index central
+    option.AccessDeniedPath = "/Home/Index";
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,11 +26,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
