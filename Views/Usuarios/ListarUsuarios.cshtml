@@ -1,67 +1,63 @@
 ﻿@model List<ModelUsuarios>
 
 @{
-    ViewData["Title"] = "ListarUsuarios";
+    ViewData["Title"] = "Listar Usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ListarUsuarios</h1>
+<h1 class="mb-4">Listar Usuarios</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    <script>
+        alert('@TempData["Mensaje"]');
+    </script>
+}
 
 <div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>            
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
                 <th scope="col">USER</th>
                 <th scope="col">NOMBRE</th>
                 <th scope="col">APELLIDO</th>
-                <th>Accion</th>
+                <th scope="col" class="text-end">ACCIONES</th>
             </tr>
         </thead>
-        <tbody class="table-primary">
+        <tbody>
             @foreach (var item in Model.Where(u => u.UsuarioActivo == 1))
             {
                 <tr>
                     <th scope="row">@item.UsuarioUserName</th>
                     <td>@item.UsuarioNombre</td>
                     <td>@item.UsuarioApellido</td>
-
                     <td>
-                        <form asp-controller="Usuarios" asp-action="TraerUsuario">
-                            <input type="hidden" name="id" value="@item.UsuarioID" />
-                            <button type="submit" class="btn btn-success">
-                                <span class="material-symbols-outlined">visibility</span>
-                            </button>
-                        </form>
-                    </td>
+                        <div class="d-flex justify-content-end gap-2">
+                            <form asp-controller="Usuarios" asp-action="TraerUsuario">
+                                <input type="hidden" name="id" value="@item.UsuarioID" />
+                                <button type="submit" class="btn btn-outline-success btn-sm" title="Ver Usuario">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </form>
 
-                    <td>
-                        <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
-                            <input type="hidden" name="id" value="@item.UsuarioID" />
-                            <button type="submit" class="btn btn-success">
-                                <span class="material-symbols-outlined">edit</span>
-                            </button>
-                        </form>
-                    </td>
+                            <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
+                                <input type="hidden" name="id" value="@item.UsuarioID" />
+                                <button type="submit" class="btn btn-outline-warning btn-sm" title="Editar Usuario">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                            </form>
 
-                    <td>
-                        <form asp-controller="Usuarios" asp-action="desactivarUser">
-                            <input type="hidden" name="id" value="@item.UsuarioID" />
-                            <input type="hidden" name="id" value="@item.UserBaja" />
-                            <button type="submit" class="btn btn-danger">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
-                        </form>
+                            <form asp-controller="Usuarios" asp-action="desactivarUser">
+                                <input type="hidden" name="id" value="@item.UsuarioID" />
+                                <input type="hidden" name="userBaja" value="@item.UserBaja" />
+                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             }
-
-            @if (TempData["Mensaje"] != null)
-            {
-                <script>
-                    alert('@TempData["Mensaje"]');
-                </script>
-            }
         </tbody>
-
-</table>
+    </table>
 </div>
