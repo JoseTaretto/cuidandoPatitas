@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
 using AppCuidandoPatitas.Models;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppCuidandoPatitas.Controllers
 {
@@ -9,6 +12,8 @@ namespace AppCuidandoPatitas.Controllers
     {
         readonly DatosUsuarios DatosUsuarios = new DatosUsuarios();
 
+
+        [Authorize(Roles = "Admin")]
         public IActionResult ListarUsuarios()
         {
             var listaUsuarios = DatosUsuarios.Listar();
@@ -23,7 +28,6 @@ namespace AppCuidandoPatitas.Controllers
         [HttpPost]
         public IActionResult GuardarUsuario(ModelUsuarios objUsuario)
         {
-
             var respuesta = DatosUsuarios.Guardar(objUsuario);
 
             if(respuesta == true)
