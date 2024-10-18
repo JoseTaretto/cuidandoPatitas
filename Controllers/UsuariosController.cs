@@ -12,14 +12,12 @@ namespace AppCuidandoPatitas.Controllers
     {
         readonly DatosUsuarios DatosUsuarios = new DatosUsuarios();
 
-
         [Authorize(Roles = "Admin")]
         public IActionResult ListarUsuarios()
         {
             var listaUsuarios = DatosUsuarios.Listar();
             return View(listaUsuarios);
         }
-
         public IActionResult NuevoUsuario()
         {
             return View();
