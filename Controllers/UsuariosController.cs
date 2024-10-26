@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
+using AppCuidandoPatitas.Interface;
 using AppCuidandoPatitas.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -8,16 +9,26 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppCuidandoPatitas.Controllers
 {
-    public class UsuariosController : Controller
+    public partial class UsuariosController : Controller
     {
-        readonly DatosUsuarios DatosUsuarios = new DatosUsuarios();
+        readonly DatosUsuarios DatosUsuarios = new();
+        readonly DatosDocumento DatosDocumento = new();
+
+        public enum TipoDocumento
+        {
+            DocumentoHumano = 1,
+            DocumentoAnimal = 2
+        }
 
         [Authorize(Roles = "Admin")]
         public IActionResult ListarUsuarios()
         {
             var listaUsuarios = DatosUsuarios.Listar();
+            var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
+
             return View(listaUsuarios);
         }
+
         public IActionResult NuevoUsuario()
         {
             return View();

@@ -1,15 +1,13 @@
 ﻿using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-
-
 namespace AppCuidandoPatitas.Datos
 {
     public class DatosDocumento
     {
-        public List<ModelDocumento> ListarDocumento(int tipoDocumento)
+        public List<ModelDocumentos> ListarDocumento(int tipoDocumento)
         {
-            var listaDocumentos = new List<ModelDocumento>();
+            var listaDocumentos = new List<ModelDocumentos>();
             var con = new Conexion();
             var conexion = new SqlConnection(con.getCadenaSQL());
             {
@@ -22,7 +20,7 @@ namespace AppCuidandoPatitas.Datos
                 {
                     while (dr.Read())
                     {
-                        listaDocumentos.Add(new ModelDocumento()
+                        listaDocumentos.Add(new ModelDocumentos()
                         {
                             DocumentoID = Convert.ToInt32(dr["DOCUMENTO_ID"]),
                             DocumentoNombre = dr["DOCUMENTO_NOMBRE"].ToString()   
