@@ -13,7 +13,7 @@ namespace AppCuidandoPatitas.Controllers
         public IActionResult LogIn()
         {
             return View();  
-        } 
+        }
 
         [HttpPost]
         public async Task<IActionResult> LogInIndex(ModelUsuarios user) { 
