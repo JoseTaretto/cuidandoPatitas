@@ -12,7 +12,7 @@ namespace AppCuidandoPatitas.Controllers
     {
         readonly DatosUsuarios DatosUsuarios = new DatosUsuarios();
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "dmin")]
         public IActionResult ListarUsuarios()
         {
             var listaUsuarios = DatosUsuarios.Listar();
@@ -55,9 +55,11 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
-        public IActionResult desactivarUser(int id, int baja)
+        public IActionResult DesactivarUser(int id)
         {
-            var usuario = DatosUsuarios.Baja(id, baja);
+            var userBaja = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var usuario = DatosUsuarios.Baja(id, userBaja);
             {
                 if(usuario != 0)
                 {
