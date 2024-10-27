@@ -1,6 +1,7 @@
 ﻿using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
+
 namespace AppCuidandoPatitas.Datos
 {
     public class DatosDocumento

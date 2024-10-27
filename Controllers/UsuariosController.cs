@@ -16,21 +16,22 @@ namespace AppCuidandoPatitas.Controllers
 
         public enum TipoDocumento
         {
-            DocumentoHumano = 1,
-            DocumentoAnimal = 2
+            DocumentoHumano = 1           
         }
 
-        [Authorize(Roles = "dmin")]
+        [Authorize(Roles = "admin")]
         public IActionResult ListarUsuarios()
         {
-            var listaUsuarios = DatosUsuarios.Listar();
-            var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
+            var listaUsuarios = DatosUsuarios.Listar();     
 
             return View(listaUsuarios);
         }
 
         public IActionResult NuevoUsuario()
         {
+            var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
+            ViewBag.ListaDocumentos = listaDocumentos;
+
             return View();
         }
 
@@ -68,11 +69,11 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult DesactivarUser(int id)
         {
-            var userBaja = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var userBajaId = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
-            var usuario = DatosUsuarios.Baja(id, userBaja);
+            var usuario = DatosUsuarios.Baja(id, userBajaId);
             {
-                if(usuario != 0)
+                if(usuario)
                 {
                     TempData["Mensaje"] = "Usuario dado de baja";
                     return RedirectToAction("listarUsuarios");
@@ -85,10 +86,29 @@ namespace AppCuidandoPatitas.Controllers
                 }
 
             }
+        }       
+
+        public IActionResult EditarUsuarioView(int id)
+        {
+
+            var usuario = DatosUsuarios.TraerUno(id);
+           
+
+            if (usuario != null)
+            {
+                var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
+                ViewBag.ListaDocumentos = listaDocumentos;
+                return View("EditarUsuarioView", usuario);
+            }
+            else
+            {
+             
+                return View();
+            }
         }
 
         [HttpPost]
-        public IActionResult editarUsuario(ModelUsuarios objUsuario)
+        public IActionResult Editar(ModelUsuarios objUsuario)
         {
 
             var respuesta = DatosUsuarios.Editar(objUsuario);
@@ -96,23 +116,6 @@ namespace AppCuidandoPatitas.Controllers
             if (respuesta == true)
             {
                 return RedirectToAction("editarUsuarios");
-            }
-            else
-            {
-                Console.WriteLine("error");
-                return View();
-            }
-        }
-
-        public IActionResult EditarUsuarioView(int id)
-        {
-
-            var usuario = DatosUsuarios.TraerUno(id);
-
-            if (usuario != null)
-            {
-                Console.WriteLine($"ID del Usuario: {id}");
-                return View("EditarUsuarioView", usuario);
             }
             else
             {

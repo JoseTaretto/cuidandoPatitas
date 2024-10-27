@@ -1,11 +1,12 @@
 ﻿using AppCuidandoPatitas.Models;
+using AppCuidandoPatitas.Interface;
 using System.Data.SqlClient;
 using System.Data;
 using Microsoft.CodeAnalysis;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosUsuarios
+    public class DatosUsuarios : IGuardar<ModelUsuarios>
     {
        public List<ModelUsuarios> Listar()
         {
@@ -65,11 +66,11 @@ namespace AppCuidandoPatitas.Datos
             try
             {
                 var con = new Conexion();
-                var conexcion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.getCadenaSQL());
 
                 {
-                    conexcion.Open();
-                    SqlCommand cmd = new SqlCommand("InsertarUsuario", conexcion);                    
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("InsertarUsuario", conexion);                    
 
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
                     cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
@@ -102,33 +103,37 @@ namespace AppCuidandoPatitas.Datos
 
         }
 
-        public int Baja(int id, int baja)
+        public bool Baja(int id, int bajaId)
         {
+            bool respuesta;
+
             try
             {
                 var objUsuario = new ModelUsuarios();
                 var con = new Conexion();
-                var conexcion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.getCadenaSQL());
 
                 {
-                    conexcion.Open();
-                    SqlCommand cmd = new SqlCommand("EliminarUsuario", conexcion);
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("EliminarUsuario", conexion);
                     cmd.Parameters.AddWithValue("@USER_ID", id);
-                    cmd.Parameters.AddWithValue("@USER_BAJA", baja);
+                    cmd.Parameters.AddWithValue("@USER_BAJA", bajaId);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    return rowsAffected;
+     
                 }
 
-                
+                respuesta = true;
             }
             catch (Exception x)
             {
+                respuesta = false;
                 Console.WriteLine(x.Message);
-                return 0;
+                
             }
+
+            return respuesta;
         }
 
         public ModelUsuarios TraerUno(int id)
@@ -137,11 +142,11 @@ namespace AppCuidandoPatitas.Datos
             {
                 var objUsuario = new ModelUsuarios();
                 var con = new Conexion();
-                var conexcion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.getCadenaSQL());
 
                 {
-                    conexcion.Open();
-                    SqlCommand cmd = new SqlCommand("TraerUsuarioPorID", conexcion);
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("TraerUsuarioPorID", conexion);
                     cmd.Parameters.AddWithValue("@USER_ID", id);
                     cmd.CommandType = CommandType.StoredProcedure;
 
