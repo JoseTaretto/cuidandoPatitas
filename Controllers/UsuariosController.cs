@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AppCuidandoPatitas.Controllers
 {
-    public partial class UsuariosController : Controller
+    public class UsuariosController : Controller
     {
         readonly DatosUsuarios DatosUsuarios = new();
         readonly DatosDocumento DatosDocumento = new();
