@@ -56,13 +56,11 @@ namespace AppCuidandoPatitas.Controllers
             var usuario = DatosUsuarios.TraerUno(id);
 
             if (usuario != null)
-            {
-                Console.WriteLine($"ID del Usuario: {id}" );
+            {        
                 return View("VerUser", usuario);
             }
             else
             {
-                Console.WriteLine("error");
                 return View();
             }
         }
@@ -70,40 +68,33 @@ namespace AppCuidandoPatitas.Controllers
         public IActionResult DesactivarUser(int id)
         {
             var userBajaId = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
             var usuario = DatosUsuarios.Baja(id, userBajaId);
+
+            if (usuario)
             {
-                if(usuario)
-                {
-                    TempData["Mensaje"] = "Usuario dado de baja";
-                    return RedirectToAction("listarUsuarios");
-                }
-                else
-                {
-                    TempData["Mensaje"] = "No existe el usuario";
-                    return RedirectToAction("listarUsuarios");
-
-                }
-
+                TempData["Mensaje"] = "Usuario dado de baja";
+                return RedirectToAction("listarUsuarios");
+            }
+            else
+            {
+                TempData["Mensaje"] = "No existe el usuario";
+                return RedirectToAction("listarUsuarios");
             }
         }       
 
         public IActionResult EditarUsuarioView(int id)
         {
-
-            var usuario = DatosUsuarios.TraerUno(id);
-           
+            var usuario = DatosUsuarios.TraerUno(id);          
 
             if (usuario != null)
             {
                 var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
                 ViewBag.ListaDocumentos = listaDocumentos;
-                return View("EditarUsuarioView", usuario);
+                return View(usuario);
             }
             else
             {
-             
-                return View();
+                return RedirectToAction("listarUsuarios");
             }
         }
 
@@ -113,13 +104,12 @@ namespace AppCuidandoPatitas.Controllers
 
             var respuesta = DatosUsuarios.Editar(objUsuario);
 
-            if (respuesta == true)
+            if (respuesta)
             {
-                return RedirectToAction("editarUsuarios");
+                return RedirectToAction("listarUsuarios");
             }
             else
-            {
-                Console.WriteLine("error");
+            {             
                 return View();
             }
         }
