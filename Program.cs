@@ -1,3 +1,4 @@
+using AppCuidandoPatitas.Datos;
 using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +12,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     option.AccessDeniedPath = "/Home/Index";
 });
 
+// Registrar DatosAnimales en el contenedor de servicios
+builder.Services.AddScoped<DatosAnimales>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

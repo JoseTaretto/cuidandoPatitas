@@ -1,0 +1,28 @@
+@model List<AppCuidandoPatitas.Models.ModelAnimales>
+
+
+@{
+    ViewData["Title"] = "Lista de Animales";
+}
+
+<h2>Lista de Animales</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Raza</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var animal in Model)
+        {
+            <tr>
+                <td>@animal.AnimalId</td>
+                <td>@animal.AnimalNombre</td>
+                <td>@animal.RazaId</td>
+            </tr>
+        }
+    </tbody>
+</table>

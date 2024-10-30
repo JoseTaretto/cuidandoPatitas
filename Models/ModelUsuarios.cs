@@ -1,8 +1,7 @@
-﻿using AppCuidandoPatitas.Interface;
-
+﻿
 namespace AppCuidandoPatitas.Models
 {
-    public class ModelUsuarios : IDocumento
+    public class ModelUsuarios
     {
         // Atributos privados
         private int _usuario_id;
