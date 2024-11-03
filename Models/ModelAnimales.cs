@@ -16,6 +16,7 @@ namespace AppCuidandoPatitas.Models
         private string _animal_documento;
         private decimal _animal_peso;
         private int _animal_castrado;
+        private int _animal_estado;
         private string _animal_descripcion;
         private DateTime _fecha_alta;
         private int _user_alta;
@@ -36,6 +37,8 @@ namespace AppCuidandoPatitas.Models
         public string AnimalDocumento{ get => _animal_documento; set => _animal_documento = value; }
         public decimal AnimalPeso { get => _animal_peso; set => _animal_peso = value; }
         public int AnimalCastrado { get => _animal_castrado; set => _animal_castrado = value; }
+
+        public int AnimalEstado { get => _animal_estado; set => _animal_estado = value; }
         public string AnimalDescripcion { get => _animal_descripcion; set => _animal_descripcion = value; }
         public DateTime FechaAlta { get => _fecha_alta; set => _fecha_alta = value; }
         public int UserAlta { get => _user_alta; set => _user_alta = value; }

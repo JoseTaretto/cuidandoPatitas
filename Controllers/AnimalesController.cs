@@ -14,10 +14,46 @@ namespace AppCuidandoPatitas.Controllers
             _datosAnimales = datosAnimales;
         }
 
-        public IActionResult Index()
+
+
+        public IActionResult traerMascotas()
         {
-            List<ModelAnimales> listaAnimales = _datosAnimales.Listar(); // Asegúrate de implementar este método
+            List<ModelAnimales> listaAnimales = _datosAnimales.Listar();
             return View("ListarAnimales", listaAnimales);
+        }
+
+        [HttpGet]
+        public IActionResult vistaIngresarMascota()
+        {
+            return View(); 
+        }
+
+
+        [HttpPost]
+        public IActionResult ingresarMascota(ModelAnimales objMascota)
+
+        {
+            var respuesta = _datosAnimales.ingresarAnimal(objMascota);
+
+            try
+            {
+
+                if (respuesta == true)
+                {
+                    return traerMascotas();
+
+                }
+                else
+                {
+                    return View(objMascota);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -1,0 +1,84 @@
+﻿@model ModelAnimales
+
+@{
+    ViewData["Title"] = "Nuevo Animal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <form asp-action="ingresarMascota" asp-controller="Animales" method="post">
+        <div class="row g-3 align-items-center p-3 fw-bold">
+
+            <div class="col-md-4">
+                <label for="especieId" class="form-label">Especie</label>
+                <input asp-for="EspecieId" type="number" class="form-control" id="especieId" value="1" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="razaId" class="form-label">Raza</label>
+                <input asp-for="RazaId" type="number" class="form-control" id="razaId" value="1" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalNombre" class="form-label">Nombre del Animal</label>
+                <input asp-for="AnimalNombre" type="text" class="form-control" id="animalNombre" maxlength="30" value="Nombre por defecto" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalSexo" class="form-label">Sexo</label>
+                <select asp-for="AnimalSexo" class="form-control" id="animalSexo" required>
+                    <option value="" disabled>Seleccione el sexo del animal</option>
+                    <option value="M" selected>Masculino</option> <!-- Valor por defecto -->
+                    <option value="F">Femenino</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalEdad" class="form-label">Edad</label>
+                <input asp-for="AnimalEdad" type="number" class="form-control" id="animalEdad" value="2" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input asp-for="AnimalFechaNacimiento" type="date" class="form-control" id="animalFechaNacimiento" value="@DateTime.Now.AddYears(-2).ToString("yyyy-MM-dd")" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalPeso" class="form-label">Peso</label>
+                <input asp-for="AnimalPeso" type="number" step="0.01" class="form-control" id="animalPeso" value="10.0" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalCastrado" class="form-label">¿Animal Castrado?</label>
+                <select asp-for="AnimalCastrado" class="form-select" id="animalCastrado" required>
+                    <option value="" disabled>Seleccione una opción</option>
+                    <option value="1" selected>Sí</option> <!-- Valor por defecto -->
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalEstado" class="form-label">Estado</label>
+                <input asp-for="AnimalEstado" type="number" class="form-control" id="animalEstado" value="1" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="documentoId" class="form-label">Documento ID</label>
+                <input asp-for="DocumentoID" type="number" class="form-control" id="documentoId" value="1" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalDocumento" class="form-label">Número de Documento</label>
+                <input asp-for="AnimalDocumento" type="number" class="form-control" id="animalDocumento" maxlength="20" value="1234567890" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="animalDescripcion" class="form-label">Descripción</label>
+                <textarea asp-for="AnimalDescripcion" class="form-control" id="animalDescripcion" rows="3">Descripción por defecto</textarea> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary mb-4 fw-bold">Registrar</button>
+            </div>
+        </div>
+    </form>
+</div>
