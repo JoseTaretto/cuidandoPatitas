@@ -2,7 +2,7 @@
 
 namespace AppCuidandoPatitas.Models
 {
-    public class ModelAnimales : IDocumento
+   public class ModelAnimales : IDocumento
     {
         private int _animal_id;
         private int _especie_id;
@@ -24,6 +24,7 @@ namespace AppCuidandoPatitas.Models
         private int _user_modificacion;
         private DateTime _fecha_baja;
         private int _user_baja;
+        private int _adoptado;
 
         public int AnimalId { get => _animal_id; set => _animal_id = value; }
         public int EspecieId { get => _especie_id; set => _especie_id = value; }
@@ -46,5 +47,8 @@ namespace AppCuidandoPatitas.Models
         public int UserModificacion { get => _user_modificacion; set => _user_modificacion = value; }
         public DateTime FechaBaja { get => _fecha_baja; set => _fecha_baja = value; }
         public int UserBaja { get => _user_baja; set => _user_baja = value; }
+        public int Adoptado { get => _adoptado; set => _adoptado = value; }
     }
 }
+
+

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
 using AppCuidandoPatitas.Models;
-using System.Collections.Generic;
 
 namespace AppCuidandoPatitas.Controllers
 {
@@ -13,8 +12,6 @@ namespace AppCuidandoPatitas.Controllers
         {
             _datosAnimales = datosAnimales;
         }
-
-
 
         public IActionResult traerMascotas()
         {
@@ -35,25 +32,30 @@ namespace AppCuidandoPatitas.Controllers
         {
             var respuesta = _datosAnimales.ingresarAnimal(objMascota);
 
-            try
+            if (respuesta == true)
             {
-
-                if (respuesta == true)
-                {
-                    return traerMascotas();
-
-                }
-                else
-                {
-                    return View(objMascota);
-
-                }
+                return traerMascotas();
             }
-
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return View();
             }
         }
+
+        [HttpPost]
+
+        public IActionResult adoptarMascota(int animalId){
+
+            var respuesta = _datosAnimales.adoptarAnimal(animalId);
+
+            if (respuesta != 0)
+            {
+                return traerMascotas();
+            }
+            else
+            {
+                return View();
+            }                 
+        }    
     }
 }

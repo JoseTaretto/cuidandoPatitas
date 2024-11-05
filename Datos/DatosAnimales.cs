@@ -1,7 +1,7 @@
 using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-using System.Collections.Generic;
+using System.Text.Json;
 
 
 namespace AppCuidandoPatitas.Datos
@@ -14,6 +14,7 @@ namespace AppCuidandoPatitas.Datos
                 var listaAnimales = new List<ModelAnimales>();
                 var con = new Conexion();
                 var conexion = new SqlConnection(con.getCadenaSQL());
+                
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("TraerListaAnimales", conexion);
@@ -21,22 +22,23 @@ namespace AppCuidandoPatitas.Datos
 
                     var dr = cmd.ExecuteReader();
                     {
+                        ModelAnimales asd = new ModelAnimales();
+                        Console.WriteLine(JsonSerializer.Serialize(asd));
+
                         while (dr.Read())
                         {
                             listaAnimales.Add(new ModelAnimales()
                             {
-                                AnimalId = Convert.ToInt32(dr["ANIMAL_ID"]),
-                                
+                                AnimalId = Convert.ToInt32(dr["ANIMAL_ID"]),                                
                                 AnimalNombre = dr["ANIMAL_NOMBRE"].ToString(),
                                 RazaId = Convert.ToInt32(dr["RAZA_ID"]),
                                 AnimalEdad = Convert.ToInt32(dr["ANIMAL_EDAD"]),
                                 AnimalSexo = Convert.ToChar(dr["ANIMAL_SEXO"]),
-                                                            
+                                Adoptado = Convert.ToInt32(dr["adoptado"]),
                                 AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(),  
                             });
                         }
                     }
-
                 }
                 return listaAnimales;
             }
@@ -52,7 +54,7 @@ namespace AppCuidandoPatitas.Datos
                 var conexion = new SqlConnection(con.getCadenaSQL());
 
                 {
-                     conexion.Open();
+                    conexion.Open();
                     SqlCommand cmd = new SqlCommand("InsertarAnimal", conexion);
 
                     cmd.Parameters.AddWithValue("ESPECIE_ID", objMascota.EspecieId);
@@ -73,8 +75,7 @@ namespace AppCuidandoPatitas.Datos
                 }
 
                 respuesta = true;
-                return respuesta;
-                
+                return respuesta;                
             }
 
             catch (Exception x)
@@ -85,7 +86,30 @@ namespace AppCuidandoPatitas.Datos
 
             return respuesta;
         }
+
+        public int adoptarAnimal(int animalId){
+
+            int respuesta;
+
+            try{
+
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.getCadenaSQL());                
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ActualizarAdoptado", conexion);                    
+                cmd.Parameters.AddWithValue("@AnimalID", animalId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                respuesta = 1;
+                return respuesta;
+            }
+
+            catch (Exception x) { 
+
+                Console.Error.WriteLine(x);
+                respuesta = 0;
+                return respuesta;
+            }
+        }
     }
-
-
 }
