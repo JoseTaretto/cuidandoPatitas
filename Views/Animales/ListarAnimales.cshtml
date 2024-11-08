@@ -14,7 +14,8 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Raza</th>            
+            <th>Raza</th>
+            <th>Estado</th>            
             <th>ACCIONES</th>
         </tr>
     </thead>
@@ -28,8 +29,17 @@
                     <td>@animal.AnimalNombre</td>
                     <td>@animal.RazaId</td>
                     <td>@animal.Adoptado</td>
+                    <td>@animal.AnimalEstado</td>
                     <td>
                         <form asp-action="adoptarMascota" asp-controller="Animales" method="post">
+                            <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
+                            <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
+                                <span class="material-symbols-outlined">pets</span>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="eliminarMascota" asp-controller="Animales" method="post">
                             <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
                             <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
                                 <span class="material-symbols-outlined">pets</span>

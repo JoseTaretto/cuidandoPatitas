@@ -55,6 +55,20 @@ namespace AppCuidandoPatitas.Controllers
             {
                 return View();
             }                 
-        }    
+        }   
+
+        public IActionResult eliminarMascota(int animalId) {
+
+            var respuesta = _datosAnimales.eliminarAnimal(animalId);
+
+             if (respuesta != 0)
+            {
+                return traerMascotas();
+            }
+            else
+            {
+                return View();
+            }                 
+        }
     }
 }

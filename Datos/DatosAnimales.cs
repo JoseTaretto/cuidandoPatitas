@@ -31,7 +31,8 @@ namespace AppCuidandoPatitas.Datos
                                 AnimalEdad = Convert.ToInt32(dr["ANIMAL_EDAD"]),
                                 AnimalSexo = Convert.ToChar(dr["ANIMAL_SEXO"]),
                                 Adoptado = Convert.ToInt32(dr["adoptado"]),
-                                AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(),  
+                                AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(), 
+                                AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"])
                             });
                         }
                     }
@@ -106,6 +107,32 @@ namespace AppCuidandoPatitas.Datos
                 respuesta = 0;
                 return respuesta;
             }
+        }
+
+        public int eliminarAnimal(int animalId){
+
+             int respuesta;
+
+            try{
+
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.getCadenaSQL());                
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ActualizarEstadoAnimal", conexion);                    
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                respuesta = 1;
+                return respuesta;
+            }
+
+            catch (Exception x) { 
+
+                Console.Error.WriteLine(x);
+                respuesta = 0;
+                return respuesta;
+            } 
+
         }
     }
 }
