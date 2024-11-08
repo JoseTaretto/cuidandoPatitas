@@ -1,7 +1,6 @@
 using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-using System.Text.Json;
 
 
 namespace AppCuidandoPatitas.Datos
@@ -22,9 +21,6 @@ namespace AppCuidandoPatitas.Datos
 
                     var dr = cmd.ExecuteReader();
                     {
-                        ModelAnimales asd = new ModelAnimales();
-                        Console.WriteLine(JsonSerializer.Serialize(asd));
-
                         while (dr.Read())
                         {
                             listaAnimales.Add(new ModelAnimales()

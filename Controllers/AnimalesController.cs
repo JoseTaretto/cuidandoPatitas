@@ -25,7 +25,6 @@ namespace AppCuidandoPatitas.Controllers
             return View(); 
         }
 
-
         [HttpPost]
         public IActionResult ingresarMascota(ModelAnimales objMascota)
 
@@ -34,7 +33,7 @@ namespace AppCuidandoPatitas.Controllers
 
             if (respuesta == true)
             {
-                return traerMascotas();
+                return RedirectToAction("traerMascotas", "Animales");
             }
             else
             {
