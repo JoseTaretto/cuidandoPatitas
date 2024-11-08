@@ -127,43 +127,53 @@ namespace AppCuidandoPatitas.Datos
             }
 
             catch (Exception x) { 
-
+                Console.Error.WriteLine(x);
                 respuesta = 0;
                 return respuesta;
             } 
 
         }
 
-        public int actualizarAnimal(int animalId){
+        public bool actualizarAnimal(ModelAnimales objAnimal){
 
-             int respuesta;
+            bool respuesta;
 
-            try{
-
+            try
+            {
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());                
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("ActualizarDatosAnimal", conexion);                    
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.Parameters.AddWithValue(" @especie_id", int);
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.Parameters.AddWithValue("@id", animalId);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
-                respuesta = 1;
-                return respuesta;
+                var conexcion = new SqlConnection(con.getCadenaSQL());
+
+                {
+                    conexcion.Open();
+                    SqlCommand cmd = new SqlCommand("ActualizarDatosAnimal", conexcion);
+
+                    cmd.Parameters.AddWithValue("id", objAnimal.AnimalId);
+                    cmd.Parameters.AddWithValue("especie_id", objAnimal.EspecieId);
+                    cmd.Parameters.AddWithValue("raza_id", objAnimal.RazaId);
+                    cmd.Parameters.AddWithValue("animal_nombre", objAnimal.AnimalNombre);
+                    cmd.Parameters.AddWithValue("animal_sexo", objAnimal.AnimalSexo);
+                    cmd.Parameters.AddWithValue("animal_edad", objAnimal.AnimalEdad);
+                    cmd.Parameters.AddWithValue("animal_fecha_nacimiento", objAnimal.AnimalFechaNacimiento);
+                    cmd.Parameters.AddWithValue("animal_peso", objAnimal.AnimalPeso);
+                    cmd.Parameters.AddWithValue("animal_castrado", objAnimal.AnimalCastrado);
+                    cmd.Parameters.AddWithValue("animal_descripcion", objAnimal.AnimalDescripcion);
+                    cmd.Parameters.AddWithValue("animal_documento", objAnimal.AnimalDocumento);
+                    cmd.Parameters.AddWithValue("documento_id", objAnimal.DocumentoID);
+                    cmd.Parameters.AddWithValue("imagen", objAnimal.imagen);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+
+                respuesta = true;
+
+            }
+            catch (Exception x)
+            {
+                respuesta = false;
+                Console.WriteLine(x);
             }
 
-            catch (Exception x) { 
-
-                respuesta = 0;
-                return respuesta;
-            } 
-
+            return respuesta;
         }
-
     }
 }

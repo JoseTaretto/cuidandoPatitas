@@ -26,6 +26,8 @@ namespace AppCuidandoPatitas.Models
         private int _user_baja;
         private int _adoptado;
 
+        private string _imagen;
+
         public int AnimalId { get => _animal_id; set => _animal_id = value; }
         public int EspecieId { get => _especie_id; set => _especie_id = value; }
         public int RazaId { get => _raza_id; set => _raza_id = value; }
@@ -48,6 +50,7 @@ namespace AppCuidandoPatitas.Models
         public DateTime FechaBaja { get => _fecha_baja; set => _fecha_baja = value; }
         public int UserBaja { get => _user_baja; set => _user_baja = value; }
         public int Adoptado { get => _adoptado; set => _adoptado = value; }
+        public string imagen { get => _imagen; set => _imagen = value; }
     }
 }
 

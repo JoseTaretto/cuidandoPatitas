@@ -58,7 +58,6 @@ namespace AppCuidandoPatitas.Controllers
         }   
 
         [HttpPost]
-
         public IActionResult eliminarMascota(int animalId) {
 
             var respuesta = _datosAnimales.eliminarAnimal(animalId);
@@ -73,17 +72,18 @@ namespace AppCuidandoPatitas.Controllers
             }                 
         }
 
-        public IActionResult actualizarMascota(int animalId) {
+        [HttpPost]
+        public IActionResult actualizarMascota(ModelAnimales objAnimal) {
 
-            var respuesta = _datosAnimales.eliminarAnimal(animalId);
+            var respuesta = _datosAnimales.actualizarAnimal(objAnimal);
 
-             if (respuesta != 0)
+             if (respuesta != true)
             {
-                return traerMascotas();
+                return View();
             }
             else
             {
-                return View();
+                return traerMascotas();
             }                 
         }
 
