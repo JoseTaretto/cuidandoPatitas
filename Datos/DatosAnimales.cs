@@ -128,11 +128,42 @@ namespace AppCuidandoPatitas.Datos
 
             catch (Exception x) { 
 
-                Console.Error.WriteLine(x);
                 respuesta = 0;
                 return respuesta;
             } 
 
         }
+
+        public int actualizarAnimal(int animalId){
+
+             int respuesta;
+
+            try{
+
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.getCadenaSQL());                
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("ActualizarDatosAnimal", conexion);                    
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.Parameters.AddWithValue(" @especie_id", int);
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.Parameters.AddWithValue("@id", animalId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                respuesta = 1;
+                return respuesta;
+            }
+
+            catch (Exception x) { 
+
+                respuesta = 0;
+                return respuesta;
+            } 
+
+        }
+
     }
 }
