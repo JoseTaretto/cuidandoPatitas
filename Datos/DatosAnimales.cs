@@ -1,11 +1,11 @@
 using AppCuidandoPatitas.Models;
 using System.Data.SqlClient;
 using System.Data;
-
+using AppCuidandoPatitas.Interface;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosAnimales
+    public class DatosAnimales : IGuardar<ModelAnimales>, IListar<ModelAnimales>, IEditar<ModelAnimales>
     {
         public List<ModelAnimales> Listar()
         {
@@ -42,7 +42,7 @@ namespace AppCuidandoPatitas.Datos
             }
         }
 
-        public bool ingresarAnimal(ModelAnimales objMascota)
+        public bool Guardar(ModelAnimales objMascota)
         {
             bool respuesta;
 
@@ -95,7 +95,7 @@ namespace AppCuidandoPatitas.Datos
 
                 var con = new Conexion();
                 var conexion = new SqlConnection(con.getCadenaSQL());                
-                conexion.Open();
+                conexion.Open();                
                 SqlCommand cmd = new SqlCommand("ActualizarAdoptado", conexion);                    
                 cmd.Parameters.AddWithValue("@AnimalID", animalId);
                 cmd.Parameters.AddWithValue("@USER_ID", userId);
@@ -139,7 +139,7 @@ namespace AppCuidandoPatitas.Datos
 
         }
 
-        public bool actualizarAnimal(ModelAnimales objAnimal){
+        public bool Editar(ModelAnimales objAnimal){
 
             bool respuesta;
 

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosUsuarios : IGuardar<ModelUsuarios>
+    public class DatosUsuarios : IGuardar<ModelUsuarios>, IListar<ModelUsuarios>, IEditar<ModelUsuarios>
     {
        public List<ModelUsuarios> Listar()
         {

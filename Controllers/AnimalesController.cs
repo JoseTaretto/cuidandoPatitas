@@ -1,25 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
 using AppCuidandoPatitas.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppCuidandoPatitas.Controllers
 {
     public class AnimalesController : Controller
     {
-        private readonly DatosAnimales _datosAnimales;
-
-        public AnimalesController(DatosAnimales datosAnimales)
-        {
-            _datosAnimales = datosAnimales;
-        }
-
+        readonly DatosAnimales DatosAnimales = new();
+       
         public IActionResult traerMascotas()
         {
-            List<ModelAnimales> listaAnimales = _datosAnimales.Listar();
+            var listaAnimales = DatosAnimales.Listar();
             return View("ListarAnimales", listaAnimales);
         }
 
-        [HttpGet]
         public IActionResult vistaIngresarMascota()
         {
             return View(); 
@@ -29,7 +25,7 @@ namespace AppCuidandoPatitas.Controllers
         public IActionResult ingresarMascota(ModelAnimales objMascota)
 
         {
-            var respuesta = _datosAnimales.ingresarAnimal(objMascota);
+            var respuesta = DatosAnimales.Guardar(objMascota);
 
             if (respuesta == true)
             {
@@ -43,14 +39,14 @@ namespace AppCuidandoPatitas.Controllers
                 TempData["ModelErrors"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
 
                 return RedirectToAction("vistaIngresarMascota");
-                //return View();
+              
             }
         }
 
         [HttpPost]
         public IActionResult adoptarMascota(int animalId, int userId){
 
-            var respuesta = _datosAnimales.adoptarAnimal(animalId, userId);
+            var respuesta = DatosAnimales.adoptarAnimal(animalId, userId);
 
             if (respuesta != 0)
             {
@@ -65,7 +61,7 @@ namespace AppCuidandoPatitas.Controllers
         [HttpPost]
         public IActionResult eliminarMascota(int animalId) {
 
-            var respuesta = _datosAnimales.eliminarAnimal(animalId);
+            var respuesta = DatosAnimales.eliminarAnimal(animalId);
 
              if (respuesta != 0)
             {
@@ -80,7 +76,7 @@ namespace AppCuidandoPatitas.Controllers
         [HttpPost]
         public IActionResult actualizarMascota(ModelAnimales objAnimal) {
 
-            var respuesta = _datosAnimales.actualizarAnimal(objAnimal);
+            var respuesta = DatosAnimales.Editar(objAnimal);
 
              if (respuesta != true)
             {

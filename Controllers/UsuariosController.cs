@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AppCuidandoPatitas.Datos;
-using AppCuidandoPatitas.Interface;
 using AppCuidandoPatitas.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
@@ -67,6 +64,7 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult DesactivarUser(int id)
         {
+
             var userBajaId = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var usuario = DatosUsuarios.Baja(id, userBajaId);
 

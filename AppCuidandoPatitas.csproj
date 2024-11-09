@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\fotos-animales\" />
+    <Folder Include="wwwroot\fotos-adopciones\" />
   </ItemGroup>
 
 </Project>
