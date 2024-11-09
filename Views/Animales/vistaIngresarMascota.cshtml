@@ -3,6 +3,31 @@
 @{
     ViewData["Title"] = "Nuevo Animal";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var errorDetails = TempData["ErrorDetails"] as string;
+    var modelErrors = TempData["ModelErrors"] as List<string>;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error!</h4>
+        <p>@errorMessage</p>
+        <hr />
+        @if (!string.IsNullOrEmpty(errorDetails))
+        {
+            <p class="mb-0">@errorDetails</p>
+        }
+        <ul>
+            @if (modelErrors != null)
+            {
+                @foreach (var error in modelErrors)
+                {
+                    <li>@error</li>
+                }
+            }
+        </ul>
+    </div>
 }
 <div class="card">
     <form asp-action="ingresarMascota" asp-controller="Animales" method="post">
@@ -21,6 +46,11 @@
             <div class="col-md-4">
                 <label for="animalNombre" class="form-label">Nombre del Animal</label>
                 <input asp-for="AnimalNombre" type="text" class="form-control" id="animalNombre" maxlength="30" value="Nombre por defecto" required> <!-- Valor por defecto -->
+            </div>
+
+            <div class="col-md-4">
+                <label for="imagen" class="form-label">foto</label>
+                <textarea asp-for="imagen" class="form-control" id="animalDescripcion" rows="3"></textarea>
             </div>
 
             <div class="col-md-4">

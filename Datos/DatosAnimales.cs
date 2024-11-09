@@ -32,7 +32,8 @@ namespace AppCuidandoPatitas.Datos
                                 AnimalSexo = Convert.ToChar(dr["ANIMAL_SEXO"]),
                                 Adoptado = Convert.ToInt32(dr["adoptado"]),
                                 AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(), 
-                                AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"])
+                                AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"]),
+                                imagen = dr["imagen"].ToString()
                             });
                         }
                     }
@@ -66,7 +67,9 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("ANIMAL_DESCRIPCION", objMascota.AnimalDescripcion);
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objMascota.DocumentoID);
                     cmd.Parameters.AddWithValue("ANIMAL_DOCUMENTO", objMascota.AnimalDocumento);
-                    cmd.Parameters.AddWithValue("@USER_ALTA", objMascota.UserAlta);
+                    cmd.Parameters.AddWithValue("USER_ALTA", objMascota.UserAlta);
+                    cmd.Parameters.AddWithValue("IMAGEN", objMascota.imagen);
+                    cmd.Parameters.AddWithValue("USER_OWNER",objMascota.UserOwner);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
@@ -84,7 +87,7 @@ namespace AppCuidandoPatitas.Datos
             return respuesta;
         }
 
-        public int adoptarAnimal(int animalId){
+        public int adoptarAnimal(int animalId, int userId){
 
             int respuesta;
 
@@ -95,8 +98,10 @@ namespace AppCuidandoPatitas.Datos
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("ActualizarAdoptado", conexion);                    
                 cmd.Parameters.AddWithValue("@AnimalID", animalId);
+                cmd.Parameters.AddWithValue("@USER_ID", userId);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
+                
                 respuesta = 1;
                 return respuesta;
             }

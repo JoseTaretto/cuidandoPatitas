@@ -33,19 +33,24 @@ namespace AppCuidandoPatitas.Controllers
 
             if (respuesta == true)
             {
-                return RedirectToAction("traerMascotas", "Animales");
+                TempData["SuccessMessage"] = "La mascota se ingresó correctamente.";
+                return RedirectToAction("traerMascotas");
+                
             }
             else
             {
-                return View();
+                TempData["ErrorMessage"] = "No se pudo ingresar la mascota. Intenta nuevamente.";
+                TempData["ModelErrors"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+
+                return RedirectToAction("vistaIngresarMascota");
+                //return View();
             }
         }
 
         [HttpPost]
+        public IActionResult adoptarMascota(int animalId, int userId){
 
-        public IActionResult adoptarMascota(int animalId){
-
-            var respuesta = _datosAnimales.adoptarAnimal(animalId);
+            var respuesta = _datosAnimales.adoptarAnimal(animalId, userId);
 
             if (respuesta != 0)
             {
@@ -53,7 +58,7 @@ namespace AppCuidandoPatitas.Controllers
             }
             else
             {
-                return View();
+                 return traerMascotas(); //ENTRA AL ELSE POR EL USER ID
             }                 
         }   
 
@@ -86,6 +91,5 @@ namespace AppCuidandoPatitas.Controllers
                 return traerMascotas();
             }                 
         }
-
     }
 }

@@ -1,5 +1,3 @@
-@using System.Text.Json;
-
 @model List<AppCuidandoPatitas.Models.ModelAnimales>
 
 
@@ -8,50 +6,47 @@
 }
 
 <h2>Lista de Animales</h2>
-<div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Raza</th>
-            <th>Estado</th>            
-            <th>ACCIONES</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var animal in Model){
 
-            @if (animal.Adoptado != 1)
-            {
-                <tr>
-                    <td>@animal.AnimalId</td>
-                    <td>@animal.AnimalNombre</td>
-                    <td>@animal.RazaId</td>
-                    <td>@animal.Adoptado</td>
-                    <td>@animal.AnimalEstado</td>
-                    <td>
-                        <form asp-action="adoptarMascota" asp-controller="Animales" method="post">
-                            <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
-                            <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
-                                <span class="material-symbols-outlined">pets</span>
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form asp-action="eliminarMascota" asp-controller="Animales" method="post">
-                            <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
-                            <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
-                                <span class="material-symbols-outlined">pets</span>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        }       
-    </tbody>
-</table>
-</div>
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+}
 
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success" role="alert">
+        <p>@successMessage</p>
+    </div>
+}
 
+@foreach (var animal in Model)
+{
+    @if (animal.Adoptado != 1){
+        <div class="card" style="width: 18rem;">
+            <img src="@animal.imagen" class="card-img-top" alt="...">
+            <div class="card-body style="background:green">
+                <h5 class="card-title">@animal.AnimalNombre</h5>
+                <p class="card-text">@animal.AnimalDescripcion</p>
+                
+                <!--CAMBIA adoptado = 1 -->
+                <form asp-action="adoptarMascota" asp-controller="Animales" method="post" style="display: inline;">
+                    <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
+                    <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
+                        <span class="btn btn-primary">pets</span>
+                    </button>
+                </form>
 
+                <!-- EVALUA EL USER ALTA PARA MOSTRAR EL BOTON DE ELIMINAR -->
+                @if (animal.UserAlta == 1 ){ 
+                    <!--CAMBIA EL ESTADO_ANIMAL = 0 -->
+                    <form asp-action="eliminarMascota" asp-controller="Animales" method="post" style="display: inline;"> 
+                        <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
+                        <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
+                            <span class="btn btn-danger">delete</span>
+                        </button>
+                    </form>
+                }
+
+            </div>
+        </div> <br>
+    }
+}
