@@ -80,12 +80,27 @@ namespace AppCuidandoPatitas.Controllers
 
              if (respuesta != true)
             {
-                return View();
+                return RedirectToAction("traerMascotas");
             }
             else
             {
                 return traerMascotas();
             }                 
+        }
+
+        public IActionResult modificarAnimalVista(int animalId)
+        {
+
+            var mascota = DatosAnimales.TraerUno(animalId);
+
+            if(mascota != null)
+            {
+                return View(mascota);
+            }
+            else
+            {
+                return RedirectToAction("traerMascotas");
+            }
         }
     }
 }
