@@ -180,5 +180,61 @@ namespace AppCuidandoPatitas.Datos
 
             return respuesta;
         }
+
+        public ModelAnimales TraerUno(int id)
+        {
+            try
+            {
+                var objAnimal = new ModelAnimales();
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.getCadenaSQL());
+
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("TraerAnimalesID", conexion);
+                    cmd.Parameters.AddWithValue("@USER_ID", id);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    var dr = cmd.ExecuteReader();
+
+                    {
+                        if (dr.Read())
+                        {
+                            objAnimal.UsuarioID = Convert.ToInt32(dr["ANIMAL_ID"]);
+                            objAnimal.UsuarioUserName = dr["USER_NAME"].ToString();
+                            objAnimal.UsuarioRol = dr["USUARIO_ROL"].ToString();
+                            objAnimal.UsuarioPassword = dr["USUARIO_PASSWORD"].ToString();
+                            objAnimal.UsuarioNombre = dr["USUARIO_NOMBRE"].ToString();
+                            objAnimal.UsuarioApellido = dr["USUARIO_APELLIDO"].ToString();
+                            objAnimal.UsuarioFechaNacimiento = Convert.ToDateTime(dr["USUARIO_FECHA_NACIMIENTO"]);
+                            objAnimal.DocumentoID = Convert.ToInt32(dr["DOCUMENTO_ID"]);
+                            objAnimal.UsuarioDocumento = dr["USUARIO_DOCUMENTO"].ToString();
+                            objAnimal.UsuarioEmail = dr["USUARIO_EMAIL"].ToString();
+                            objAnimal.UsuarioTelefono1 = dr["USUARIO_TELEFONO_1"].ToString();
+                            objAnimal.UsuarioTelefono2 = dr["USUARIO_TELEFONO_2"].ToString();
+                            objAnimal.UsuarioDireccion = dr["USUARIO_DIRECCION"].ToString();
+                            objAnimal.LocalidadId = Convert.ToInt32(dr["LOCALIDAD"]);
+                            objAnimal.ProvinciaId = Convert.ToInt32(dr["PROVINCIA_ID"]);
+                            objAnimal.UsuarioActivo = Convert.ToInt32(dr["USUARIO_ACTIVO"]);
+                            objAnimal.FechaAlta = Convert.ToDateTime(dr["FECHA_ALTA"]);
+                            objAnimal.UserAlta = Convert.ToInt32(dr["USER_ALTA"]);
+                            objAnimal.FechaModificacion = Convert.ToDateTime(dr["FECHA_MODIFICACION"]);
+                            objAnimal.UserModificacion = Convert.ToInt32(dr["USER_MODIFICACION"]);
+                            objAnimal.FechaBaja = Convert.ToDateTime(dr["FECHA_ALTA"]);
+                            objAnimal.UserBaja = Convert.ToInt32(dr["USER_ALTA"]);
+
+                        }
+                    }
+
+                    return objAnimal;
+                }
+            }
+
+            catch (Exception x)
+            {
+                Console.WriteLine(x.Message);
+                return null;
+            }
+        }
     }
 }
