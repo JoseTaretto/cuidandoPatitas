@@ -1,4 +1,7 @@
-﻿@model ModelAnimales
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+
+@model ModelAnimales
 
 @{
     ViewData["Title"] = "Modificar Mascota";
@@ -32,6 +35,8 @@
 <div class="card">
     <form asp-action="actualizarMascota" asp-controller="Animales" method="post">
         <div class="row g-3 align-items-center p-3 fw-bold">
+
+            <input asp-for="AnimalId" type="hidden" class="form-control"> <!-- Valor por defecto -->
 
             <div class="col-md-4">
                 <label for="especieId" class="form-label">Especie</label>
@@ -92,8 +97,13 @@
             </div>
 
             <div class="col-md-4">
-                <label for="documentoId" class="form-label">Documento ID</label>
-                <input asp-for="DocumentoID" type="number" class="form-control" id="documentoId" value="1" required> <!-- Valor por defecto -->
+                <label for="documentoId" class="form-label">Tipo Documento</label>
+                <select asp-for="DocumentoID" class="form-select" id="documento" required>
+                    @foreach (var doc in ViewBag.ListaDocumentos)
+                    {
+                        <option value="@doc.DocumentoID">@doc.DocumentoNombre</option>
+                    }
+                </select>
             </div>
 
             <div class="col-md-4">

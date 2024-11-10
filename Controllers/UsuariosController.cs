@@ -43,7 +43,6 @@ namespace AppCuidandoPatitas.Controllers
             }
             else
             {
-                Console.WriteLine("error");
                 return View();
             }
         }

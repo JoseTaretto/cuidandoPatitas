@@ -9,7 +9,13 @@ namespace AppCuidandoPatitas.Controllers
     public class AnimalesController : Controller
     {
         readonly DatosAnimales DatosAnimales = new();
-       
+        readonly DatosDocumento DatosDocumento = new();
+
+        public enum TipoDocumento
+        {
+            DocumentoAnimal = 2
+        }
+
         public IActionResult traerMascotas()
         {
             var listaAnimales = DatosAnimales.Listar();
@@ -23,7 +29,6 @@ namespace AppCuidandoPatitas.Controllers
 
         [HttpPost]
         public IActionResult ingresarMascota(ModelAnimales objMascota)
-
         {
             var respuesta = DatosAnimales.Guardar(objMascota);
 
@@ -44,8 +49,8 @@ namespace AppCuidandoPatitas.Controllers
         }
 
         [HttpPost]
-        public IActionResult adoptarMascota(int animalId, int userId){
-
+        public IActionResult adoptarMascota(int animalId, int userId)
+        {
             var respuesta = DatosAnimales.adoptarAnimal(animalId, userId);
 
             if (respuesta != 0)
@@ -59,8 +64,8 @@ namespace AppCuidandoPatitas.Controllers
         }   
 
         [HttpPost]
-        public IActionResult eliminarMascota(int animalId) {
-
+        public IActionResult eliminarMascota(int animalId) 
+        {
             var respuesta = DatosAnimales.eliminarAnimal(animalId);
 
              if (respuesta != 0)
@@ -74,8 +79,8 @@ namespace AppCuidandoPatitas.Controllers
         }
 
         [HttpPost]
-        public IActionResult actualizarMascota(ModelAnimales objAnimal) {
-
+        public IActionResult actualizarMascota(ModelAnimales objAnimal)
+        {
             var respuesta = DatosAnimales.Editar(objAnimal);
 
              if (respuesta != true)
@@ -90,11 +95,12 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult modificarAnimalVista(int animalId)
         {
-
             var mascota = DatosAnimales.TraerUno(animalId);
 
             if(mascota != null)
             {
+                var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoAnimal);
+                ViewBag.ListaDocumentos = listaDocumentos;
                 return View(mascota);
             }
             else

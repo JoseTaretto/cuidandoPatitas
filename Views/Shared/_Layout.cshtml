@@ -44,25 +44,45 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         
-                        @if (User.IsInRole("admin"))
+                        @if (User.IsInRole("cp_admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="listarUsuarios">Lista Usuarios</a>
                             </li>
                         }
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Animales" asp-action="traerMascotas">Aniamles</a>
-                        </li>
-
+                        @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Animales" asp-action="traerMascotas">Animales</a>
+                            </li>
+                        }
+                  
+                        @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Animales" asp-action="vistaIngresarMascota">Ingresar</a>
                         </li>
-                        
-                       
-                        <li class="nav-item ms-auto">
-                            <button type="button" class="btn btn-sm btn-outline-primary"><a class="nav-link text-dark" asp-area="" asp-controller="Acceso" asp-action="LogIn">Acceder</a></button>
-                        </li>      
+                        }
+
+                         @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
+                        {
+                            <li class="nav-item ms-auto dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <b>USUARIO: @User.Identity.Name</b>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Acceso" asp-action="Salir" style="background-color: transparent !important;"><b>SALIR</b></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        } else
+                        {
+                            <li class="nav-item ms-auto">
+                                <button type="button" class="btn btn-sm btn-outline-primary"><a class="nav-link text-dark" asp-area="" asp-controller="Acceso" asp-action="LogIn">Acceder</a></button>
+                            </li>
+                        }
 
                     </ul>
                 </div>
