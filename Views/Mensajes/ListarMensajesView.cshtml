@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@model List<ModelMensajes>
+
+
+@{
+    ViewData["Title"] = "ListarMensajesView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="successAlert" class="alert text-center" style="display:none;">
+    @TempData["SuccessMessage"]
+</div>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">FECHA</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">TELÉFONO</th>
+                <th scope="col">MAIL</th>
+                <th scope="col" class="text-center">VISTO</th>
+                <th scope="col" class="text-center">LEER</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.MensajeFecha</th>
+                    <td>@item.MensajeNombre</td>
+                    <td>@item.MensajeTelefono</td>
+                    <td>@item.MensajeMail</td>
+                    <td class="text-center">
+                        @if (item.MensajeVisto == 1)
+                        {
+                            <!-- Carta abierta -->
+                            <span class="material-symbols-outlined" title="Mensaje leído">
+                                <span class="material-symbols-outlined">
+                                    description
+                                </span>
+                            </span>
+                        }
+                        else
+                        {
+                            <!-- Carta cerrada -->
+                            <span class="material-symbols-outlined" title="Mensaje no leído">mail</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+                            <form asp-controller="Mensajes" asp-action="VerMensajeView">
+                                <input type="hidden" name="id" value="@item.MensajeId" />
+                                <button type="submit" class="btn btn-outline-success btn-sm" title="Ver Usuario">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+@* <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">USER</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">APELLIDO</th>
+                <th scope="col" class="text-end">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.MensajeFecha</th>
+                    <td>@item.MensajeNombre</td>
+                    <td>@item.MensajeTelefono</td>
+                    <td>@item.MensajeMail</td>
+                    <td>@item.MensajeVisto</td>
+                    <td>
+                        <div class="d-flex justify-content-end gap-2">
+                            <form asp-controller="Mensajes" asp-action="TraerMensajeView">
+                                <input type="hidden" name="id" value="@item.MensajeId" />
+                                <button type="submit" class="btn btn-outline-success btn-sm" title="Ver Usuario">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </form>                           
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> *@
+
+
+<script src="~/js/mensaje-success.js"></script>
+<script>
+    mostrarMensajeSuccess('@TempData["SuccessMessage"]', "successAlert");
+</script>
+

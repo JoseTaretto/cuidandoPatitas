@@ -24,6 +24,7 @@ namespace AppCuidandoPatitas.Controllers
             return View(listaUsuarios);
         }
 
+
         public IActionResult NuevoUsuario()
         {
             var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
@@ -32,6 +33,7 @@ namespace AppCuidandoPatitas.Controllers
             return View();
         }
 
+        [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         [HttpPost]
         public IActionResult GuardarUsuario(ModelUsuarios objUsuario)
         {
@@ -47,6 +49,7 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         public IActionResult TraerUsuario(int id) {
 
             var usuario = DatosUsuarios.TraerUno(id);
@@ -63,6 +66,7 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         public IActionResult DesactivarUser(int id)
         {
 
@@ -79,8 +83,8 @@ namespace AppCuidandoPatitas.Controllers
                 TempData["Mensaje"] = "No existe el usuario";
                 return RedirectToAction("listarUsuarios");
             }
-        }       
-
+        }
+        [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         public IActionResult EditarUsuarioView(int id)
         {
             var usuario = DatosUsuarios.TraerUno(id);          
@@ -97,6 +101,7 @@ namespace AppCuidandoPatitas.Controllers
             }
         }
 
+        [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         [HttpPost]
         public IActionResult Editar(ModelUsuarios objUsuario)
         {

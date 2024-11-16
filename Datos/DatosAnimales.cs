@@ -5,7 +5,7 @@ using AppCuidandoPatitas.Interface;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosAnimales : IGuardar<ModelAnimales>, IListar<ModelAnimales>, IEditar<ModelAnimales>, ITraerUno<ModelAnimales>
+    public class DatosAnimales : IGuardarConImagen<ModelAnimales>, IListar<ModelAnimales>, IEditar<ModelAnimales>, ITraerUno<ModelAnimales>
     {
         public List<ModelAnimales> Listar()
         {
@@ -32,15 +32,14 @@ namespace AppCuidandoPatitas.Datos
                                 AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(), 
                                 AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"]),
                                 imagen = dr["imagen"].ToString()
-                            });
-                        }
+                            });                        }
                     }
                 }
                 return listaAnimales;
             }
         }
 
-        public bool Guardar(ModelAnimales objMascota)
+        public bool Guardar(ModelAnimales objMascota, IFormFile imagen)
         {
             bool respuesta;
             try
@@ -63,8 +62,27 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objMascota.DocumentoID);
                     cmd.Parameters.AddWithValue("ANIMAL_DOCUMENTO", objMascota.AnimalDocumento);
                     cmd.Parameters.AddWithValue("USER_ALTA", objMascota.UserAlta);
-                    cmd.Parameters.AddWithValue("IMAGEN", objMascota.imagen);
-                    cmd.Parameters.AddWithValue("USER_OWNER",objMascota.UserOwner);
+
+                    // Guardar la imagen en la carpeta raíz
+                    if (imagen != null && imagen.Length > 0)
+                    {
+                        var nombreArchivo = $"Foto_Animal_Nro_{Guid.NewGuid()}.png"; // Nombre único basado en el ID del viaje
+                        var rutaImagen = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fotos-animales", nombreArchivo); // Ruta de la imagen en la carpeta raíz
+                        var fileStream = new FileStream(rutaImagen, FileMode.Create);
+                        {
+                            imagen.CopyTo(fileStream);
+
+                            objMascota.imagen = @"\fotos-animales\" + nombreArchivo; // Ruta de la imagen en la carpeta wwwroot/img // Ruta de la imagen en la carpeta raíz // Ruta de la imagen relativa a la carpeta wwwroot
+                        }
+                    }
+                    else
+                    {
+                        // Si no se proporciona ninguna imagen, asignar la ruta de la imagen predeterminada a objViaje.ViajeFoto
+                        objMascota.imagen = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "fotos-animales", "no-image.png");
+                    }
+                    // Agregar parámetro para la ruta de la imagen en la consulta SQL
+
+                    cmd.Parameters.AddWithValue("IMAGEN", objMascota.imagen);           
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
@@ -82,7 +100,6 @@ namespace AppCuidandoPatitas.Datos
         public int adoptarAnimal(int animalId, int userId)
         {
             int respuesta;
-
             try{
 
                 var con = new Conexion();

@@ -35,42 +35,34 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="text-primary">
-                        Cuidando <br />
-                        Patitas 🐾
-                    </span>                   
-                </a>
+
+                 @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexLogIn">
+                        <span class="text-primary">
+                            Cuidando <br />
+                            Patitas 🐾
+                        </span>
+                    </a>
+                }else
+                {
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <span class="text-primary">
+                            Cuidando <br />
+                            Patitas 🐾
+                        </span>
+                    </a>
+                }
+                
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        
-                        @if (User.IsInRole("cp_admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="listarUsuarios">Lista Usuarios</a>
-                            </li>
-                        }
+                    <ul class="navbar-nav flex-grow-1">                                          
 
                         @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Animales" asp-action="traerMascotas">Animales</a>
-                            </li>
-                        }
-                  
-                        @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Animales" asp-action="vistaIngresarMascota">Ingresar</a>
-                        </li>
-                        }
-
-                         @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
                         {
                             <li class="nav-item ms-auto dropdown">
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,14 +70,14 @@
                                 </a>                                
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Usuarios" asp-action="TraerUsuario" asp-route-id="@Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value)" asp- style="background-color: transparent !important;"><b>MI PERFIL</b></a>
+                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Usuarios" asp-action="TraerUsuario" asp-route-id="@Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value)" asp- style="background-color: transparent !important;"><b>MI PERFIL</b></a>
                                         
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Acceso" asp-action="Salir" style="background-color: transparent !important;"><b>SALIR</b></a>
+                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Acceso" asp-action="Salir" style="background-color: transparent !important;"><b>SALIR</b></a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>    
                         } else
                         {
                             <li class="nav-item ms-auto">
@@ -104,7 +96,7 @@
         </main>
     </div>
     <!-- footer section -->
-        <section class="container-fluid footer_section">
+        <section class="container-fluid align-items-center text-center footer_section">
             <p>
             &copy; 2024 - AppCuidandoPatitas
             </p>

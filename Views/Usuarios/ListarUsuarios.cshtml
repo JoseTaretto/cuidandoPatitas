@@ -10,12 +10,9 @@
 
 <h1 class="mb-4">Listar Usuarios</h1>
 
-@if (TempData["Mensaje"] != null)
-{
-    <script>
-        alert('@TempData["Mensaje"]');
-    </script>
-}
+<div id="successAlert" class="alert text-center" style="display:none;">
+    @TempData["SuccessMessage"]
+</div>
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover">
@@ -42,20 +39,22 @@
                                     <span class="material-symbols-outlined">visibility</span>
                                 </button>
                             </form>
+                            @if (User.IsInRole("cp_admin"))
+                            {
+                                <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
+                                    <input type="hidden" name="id" value="@item.UsuarioID" />
+                                    <button type="submit" class="btn btn-outline-warning btn-sm" title="Editar Usuario">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                </form>
 
-                            <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
-                                <input type="hidden" name="id" value="@item.UsuarioID" />
-                                <button type="submit" class="btn btn-outline-warning btn-sm" title="Editar Usuario">
-                                    <span class="material-symbols-outlined">edit</span>
-                                </button>
-                            </form>
-
-                            <form asp-controller="Usuarios" asp-action="DesactivarUser">
-                                <input type="hidden" name="id" value="@item.UsuarioID" />                               
-                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
-                                    <span class="material-symbols-outlined">delete</span>
-                                </button>
-                            </form>
+                                <form asp-controller="Usuarios" asp-action="DesactivarUser">
+                                    <input type="hidden" name="id" value="@item.UsuarioID" />                               
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </form>
+                            }
                         </div>
                     </td>
                 </tr>
@@ -63,3 +62,9 @@
         </tbody>
     </table>
 </div>
+
+
+<script src="~/js/mensaje-success.js"></script>
+<script>
+    mostrarMensajeSuccess('@TempData["SuccessMessage"]', "successAlert");
+</script>
