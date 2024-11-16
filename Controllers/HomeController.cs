@@ -25,6 +25,11 @@ namespace AppCuidandoPatitas.Controllers
             return View();
         }
 
+        public IActionResult Nosotros()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult GuardarMensaje(ModelHome objHome)
         {

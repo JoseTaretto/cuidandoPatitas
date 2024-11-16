@@ -1,5 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authentication.Cookies;
+@using System.Security.Claims;
+
+@{
+    int userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +21,7 @@
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,700&display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -26,17 +31,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    </head>
 <body>
+   
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-  
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="text-primary text-center" style=" font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Alternativa a Comic Sans */">
-                       Cuidando <br />
-                       Patitas
-                   </span>
-                   
+                    <span class="text-primary">
+                        Cuidando <br />
+                        Patitas 🐾
+                    </span>                   
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -70,8 +75,12 @@
                             <li class="nav-item ms-auto dropdown">
                                 <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <b>USUARIO: @User.Identity.Name</b>
-                                </a>
+                                </a>                                
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Usuarios" asp-action="TraerUsuario" asp-route-id="@Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value)" asp- style="background-color: transparent !important;"><b>MI PERFIL</b></a>
+                                        
+                                    </li>
                                     <li>
                                         <a class="dropdown-item text-dark" asp-area="" asp-controller="Acceso" asp-action="Salir" style="background-color: transparent !important;"><b>SALIR</b></a>
                                     </li>
@@ -83,7 +92,7 @@
                                 <button type="button" class="btn btn-sm btn-outline-primary"><a class="nav-link text-dark" asp-area="" asp-controller="Acceso" asp-action="LogIn">Acceder</a></button>
                             </li>
                         }
-
+                        
                     </ul>
                 </div>
             </div>

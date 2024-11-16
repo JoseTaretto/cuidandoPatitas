@@ -10,7 +10,7 @@ namespace AppCuidandoPatitas.Datos
         {
             var listaDocumentos = new List<ModelDocumentos>();
             var con = new Conexion();
-            var conexion = new SqlConnection(con.getCadenaSQL());
+            var conexion = new SqlConnection(con.GetCadenaSQL());
             {
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("TraerListaDocumentos", conexion);

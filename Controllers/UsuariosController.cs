@@ -16,7 +16,7 @@ namespace AppCuidandoPatitas.Controllers
             DocumentoHumano = 1           
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "cp_admin")]
         public IActionResult ListarUsuarios()
         {
             var listaUsuarios = DatosUsuarios.Listar();     
@@ -52,7 +52,9 @@ namespace AppCuidandoPatitas.Controllers
             var usuario = DatosUsuarios.TraerUno(id);
 
             if (usuario != null)
-            {        
+            {
+                var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
+                ViewBag.ListaDocumentos = listaDocumentos;
                 return View("VerUser", usuario);
             }
             else

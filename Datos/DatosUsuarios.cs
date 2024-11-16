@@ -2,17 +2,16 @@
 using AppCuidandoPatitas.Interface;
 using System.Data.SqlClient;
 using System.Data;
-using Microsoft.CodeAnalysis;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosUsuarios : IGuardar<ModelUsuarios>, IListar<ModelUsuarios>, IEditar<ModelUsuarios>
+    public class DatosUsuarios : IGuardar<ModelUsuarios>, IListar<ModelUsuarios>, IEditar<ModelUsuarios>, ITraerUno<ModelUsuarios>
     {
        public List<ModelUsuarios> Listar()
         {
             var listaUsuarios = new List<ModelUsuarios>();
             var con = new Conexion();
-            var conexion = new SqlConnection(con.getCadenaSQL());
+            var conexion = new SqlConnection(con.GetCadenaSQL());
             {
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("TraerListaUsuarios", conexion);
@@ -66,7 +65,7 @@ namespace AppCuidandoPatitas.Datos
             try
             {
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexion.Open();
@@ -111,7 +110,7 @@ namespace AppCuidandoPatitas.Datos
             {
                 var objUsuario = new ModelUsuarios();
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexion.Open();
@@ -142,7 +141,7 @@ namespace AppCuidandoPatitas.Datos
             {
                 var objUsuario = new ModelUsuarios();
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexion.Open();
@@ -199,7 +198,7 @@ namespace AppCuidandoPatitas.Datos
             try
             {
                 var con = new Conexion();
-                var conexcion = new SqlConnection(con.getCadenaSQL());
+                var conexcion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexcion.Open();

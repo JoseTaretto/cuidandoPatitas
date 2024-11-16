@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "Nosotros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .linkedin-card {
+            width: 250px;
+            border: 2px solid #0077b5;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .linkedin-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .linkedin-card img {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                margin-bottom: 15px;
+                border: 3px solid #0077b5;
+            }
+
+            .linkedin-card h3 {
+                margin: 10px 0 5px;
+                font-size: 1.2em;
+                color: #0077b5;
+            }
+
+            .linkedin-card p {
+                margin: 5px 0 15px;
+                font-size: 0.95em;
+                color: #666;
+            }
+
+            .linkedin-card a {
+                text-decoration: none;
+                color: #ffffff;
+                background-color: #0077b5;
+                padding: 10px 15px;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 0.9em;
+            }
+
+                .linkedin-card a:hover {
+                    background-color: #005582;
+                }
+    </style>
+
+    <h1>Nosotros somos Cuidando Patitas</h1>
+
+    <div class="row">
+        <div class="linkedin-card">
+            <img src="../Nosotros/foto_andres_antivero.png" alt="Foto de Andres Antivero">
+            <h3>Andrés Antivero</h3>
+            <p>Líder Técnico</p>
+            <a href="https://www.linkedin.com/in/andres-oscar-antivero/" target="_blank">Ver en LinkedIn</a>
+        </div>
+
+        <div class="linkedin-card">
+            <img src="../Nosotros/foto_lisset_castillo.jpeg" alt="Foto de Lisset Castillo">
+            <h3>Lisset Castillo</h3>
+            <p>Desarrolladora</p>
+            <a href="https://www.linkedin.com/in/lisett-castilloqautomation/" target="_blank">Ver en LinkedIn</a>
+        </div>
+
+    <div class="linkedin-card">
+        <img src="../Nosotros/foto_jose_martinez.jpeg" alt="Foto de Jose Martinez">
+        <h3>José Martínez</h3>
+        <p>Desarrollador</p>
+        <a href="https://www.linkedin.com/in/type-taretto/" target="_blank">Ver en LinkedIn</a>
+    </div>
+
+        <div class="linkedin-card">
+            <img src="../Nosotros/foto_emmanuel_espinoza.jpeg" alt="Foto de Emmanuel Espinoza">
+            <h3>Emmanuel Espinoza</h3>
+            <p>Analista Funcional</p>
+            <a href="https://www.linkedin.com/in/emmanuelespinozarios/" target="_blank">Ver en LinkedIn</a>
+        </div>
+    </div>

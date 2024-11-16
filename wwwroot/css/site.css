@@ -34,3 +34,29 @@ body {
         height: 100%;
     }
 }
+
+
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    font-size: 24px; /* Tamaño fijo del texto */
+    color: #007bff; /* Azul primario */
+}
+
+.navbar-brand span {
+    text-align: justify;
+    line-height: 1.2; /* Espaciado entre líneas */
+}
+
+.navbar-brand:hover {
+    color: #0056b3; /* Cambio de color al pasar el cursor */
+}
+
+.navbar-brand .paw {
+    font-size: 20px; /* Tamaño de las patitas */
+    margin-top: 5px;
+}

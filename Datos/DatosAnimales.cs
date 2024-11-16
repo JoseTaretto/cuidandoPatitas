@@ -5,20 +5,18 @@ using AppCuidandoPatitas.Interface;
 
 namespace AppCuidandoPatitas.Datos
 {
-    public class DatosAnimales : IGuardar<ModelAnimales>, IListar<ModelAnimales>, IEditar<ModelAnimales>
+    public class DatosAnimales : IGuardar<ModelAnimales>, IListar<ModelAnimales>, IEditar<ModelAnimales>, ITraerUno<ModelAnimales>
     {
         public List<ModelAnimales> Listar()
         {
             {
                 var listaAnimales = new List<ModelAnimales>();
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
-                
+                var conexion = new SqlConnection(con.GetCadenaSQL());                
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("TraerListaAnimales", conexion);
                     cmd.CommandType = CommandType.StoredProcedure;
-
                     var dr = cmd.ExecuteReader();
                     {
                         while (dr.Read())
@@ -45,16 +43,13 @@ namespace AppCuidandoPatitas.Datos
         public bool Guardar(ModelAnimales objMascota)
         {
             bool respuesta;
-
             try
             {
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
-
+                var conexion = new SqlConnection(con.GetCadenaSQL());
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("InsertarAnimal", conexion);
-
                     cmd.Parameters.AddWithValue("ESPECIE_ID", objMascota.EspecieId);
                     cmd.Parameters.AddWithValue("RAZA_ID", objMascota.RazaId);
                     cmd.Parameters.AddWithValue("ANIMAL_NOMBRE", objMascota.AnimalNombre);
@@ -73,28 +68,25 @@ namespace AppCuidandoPatitas.Datos
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
-
                 respuesta = true;
                 return respuesta;                
             }
-
             catch (Exception x)
             {
                 respuesta = false;
                 Console.WriteLine(x);
             }
-
             return respuesta;
         }
 
-        public int adoptarAnimal(int animalId, int userId){
-
+        public int adoptarAnimal(int animalId, int userId)
+        {
             int respuesta;
 
             try{
 
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());                
+                var conexion = new SqlConnection(con.GetCadenaSQL());                
                 conexion.Open();                
                 SqlCommand cmd = new SqlCommand("ActualizarAdoptado", conexion);                    
                 cmd.Parameters.AddWithValue("@AnimalID", animalId);
@@ -114,14 +106,14 @@ namespace AppCuidandoPatitas.Datos
             }
         }
 
-        public int eliminarAnimal(int animalId){
-
+        public int eliminarAnimal(int animalId)
+        {
              int respuesta;
 
             try{
 
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());                
+                var conexion = new SqlConnection(con.GetCadenaSQL());                
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("ActualizarEstadoAnimal", conexion);                    
                 cmd.Parameters.AddWithValue("@id", animalId);
@@ -130,23 +122,21 @@ namespace AppCuidandoPatitas.Datos
                 respuesta = 1;
                 return respuesta;
             }
-
             catch (Exception x) { 
                 Console.Error.WriteLine(x);
                 respuesta = 0;
                 return respuesta;
             } 
-
         }
 
-        public bool Editar(ModelAnimales objAnimal){
-
+        public bool Editar(ModelAnimales objAnimal)
+        {
             bool respuesta;
 
             try
             {
                 var con = new Conexion();
-                var conexcion = new SqlConnection(con.getCadenaSQL());
+                var conexcion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexcion.Open();
@@ -187,7 +177,7 @@ namespace AppCuidandoPatitas.Datos
             {
                 var objAnimal = new ModelAnimales();
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexion.Open();

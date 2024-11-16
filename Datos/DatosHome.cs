@@ -14,7 +14,7 @@ namespace AppCuidandoPatitas.Datos
             try
             {
                 var con = new Conexion();
-                var conexion = new SqlConnection(con.getCadenaSQL());
+                var conexion = new SqlConnection(con.GetCadenaSQL());
 
                 {
                     conexion.Open();
