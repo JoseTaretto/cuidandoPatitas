@@ -69,17 +69,16 @@
 
                             <!-- CAMBIA adoptado = 1 -->
                             <form asp-action="adoptarMascota" asp-controller="Animales" method="post" style="display: inline;">
-                                <input type="hidden" name="AnimalId" value="@animal.AnimalId" />
+                                <input type="hidden" name="AnimalId" value="@animal.AnimalId" alt="Adoptar Mascota" />
                                 <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
                                     <span class="btn btn-primary">pets</span>
                                 </button>
                             </form>
 
-                            <!-- EVALUA EL USER ALTA PARA MOSTRAR EL BOTON DE ELIMINAR -->
-                            <!-- CAMBIA EL ESTADO_ANIMAL = 0 -->
-                            <form asp-action="modificarAnimalVista" asp-controller="Animales" asp-route-animalId="@animal.AnimalId" style="display: inline;">
+
+                            <form asp-action="modificarAnimalVista" asp-controller="Animales" asp-route-animalId="@animal.AnimalId" style="display: inline;" alt="Modificar Mascota">
                                 <button type="submit" class="material-symbols-outlined" style="background: none; border: none; padding: 0;">
-                                    <span class="btn btn-danger">delete</span>
+                                    <span class="btn btn-warning">edit</span>
                                 </button>
                             </form>
 

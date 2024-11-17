@@ -10,23 +10,19 @@
 <div class="container mt-5">
     <div class="card shadow-lg border-0 rounded">
         <div class="card-header bg-primary text-white text-center">
-            <h3 class="mb-0">Mensaje de @Model.MensajeNombre</h3>
+            <h3 class="mb-0">ASUNTO: @Model.MensajeTelefono</h3>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Fecha y Hora:</label>
                     <input asp-for="MensajeFecha" type="datetime" class="form-control" readonly>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Nombre:</label>
                     <input asp-for="MensajeNombre" type="text" class="form-control" readonly>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label fw-bold">Teléfono:</label>
-                    <input asp-for="MensajeTelefono" type="text" class="form-control" readonly>
-                </div>
-                <div class="col-md-3">
+                </div>                
+                <div class="col-md-4">
                     <label class="form-label fw-bold">Correo Electrónico:</label>
                     <input asp-for="MensajeMail" type="text" class="form-control" readonly>
                 </div>

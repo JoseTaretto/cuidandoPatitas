@@ -18,10 +18,10 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th scope="col">FECHA</th>
-                <th scope="col">NOMBRE</th>
-                <th scope="col">TELÉFONO</th>
-                <th scope="col">MAIL</th>
+                <th class="text-center" scope="col">NOMBRE</th>
+                <th class="text-center" scope="col">FECHA</th>                              
+                <th class="text-center" scope="col">MAIL</th>
+                <th class="text-center" scope="col">ASUNTO</th>
                 <th scope="col" class="text-center">VISTO</th>
                 <th scope="col" class="text-center">LEER</th>
             </tr>
@@ -30,10 +30,10 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <th scope="row">@item.MensajeFecha</th>
-                    <td>@item.MensajeNombre</td>
-                    <td>@item.MensajeTelefono</td>
-                    <td>@item.MensajeMail</td>
+                    <th class="text-center" scope="row">@item.MensajeNombre</th>
+                    <td class="text-center">@item.MensajeFecha</td>
+                    <td class="text-center">@item.MensajeMail</td>
+                    <td class="text-center">@item.MensajeTelefono</td>
                     <td class="text-center">
                         @if (item.MensajeVisto == 1)
                         {

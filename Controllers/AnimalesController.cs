@@ -60,8 +60,9 @@ namespace AppCuidandoPatitas.Controllers
 
         [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         [HttpPost]
-        public IActionResult adoptarMascota(int animalId, int userId)
+        public IActionResult adoptarMascota(int animalId)
         {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var respuesta = DatosAnimales.adoptarAnimal(animalId, userId);
 
             if (respuesta != 0)

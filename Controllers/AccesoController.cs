@@ -40,8 +40,8 @@ namespace AppCuidandoPatitas.Controllers
 
             else
             {
-                TempData["SuccessMessage"] = "Ha ingresado una contraseña erronea o un usuario erroneo o una empresa erronea";
-                return RedirectToAction("Acceso", "Login");
+                TempData["SuccessMessage"] = "Ha ingresado una contraseña erronea o un usuario erroneo";
+                return RedirectToAction("LogIn", "Acceso");
             }
 
         }

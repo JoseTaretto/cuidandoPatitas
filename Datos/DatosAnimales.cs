@@ -49,8 +49,7 @@ namespace AppCuidandoPatitas.Datos
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("InsertarAnimal", conexion);
-                    cmd.Parameters.AddWithValue("ESPECIE_ID", objMascota.EspecieId);
-                    cmd.Parameters.AddWithValue("RAZA_ID", objMascota.RazaId);
+                    cmd.Parameters.AddWithValue("ESPECIE_ID", objMascota.EspecieId);                   
                     cmd.Parameters.AddWithValue("ANIMAL_NOMBRE", objMascota.AnimalNombre);
                     cmd.Parameters.AddWithValue("ANIMAL_SEXO", objMascota.AnimalSexo);
                     cmd.Parameters.AddWithValue("ANIMAL_EDAD", objMascota.AnimalEdad);
