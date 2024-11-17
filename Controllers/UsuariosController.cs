@@ -41,10 +41,13 @@ namespace AppCuidandoPatitas.Controllers
 
             if(respuesta == true)
             {
+                TempData["SuccessMessage"] = "Exito - Usuario " + objUsuario.UsuarioUserName + " ingresado exitosamente.";
+
                 return RedirectToAction("listarUsuarios");
             }
             else
             {
+                TempData["SuccessMessage"] = "Error - Error al ingresar el usuario.";
                 return View();
             }
         }
@@ -91,12 +94,14 @@ namespace AppCuidandoPatitas.Controllers
 
             if (usuario != null)
             {
+                
                 var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
                 ViewBag.ListaDocumentos = listaDocumentos;
                 return View(usuario);
             }
             else
             {
+                
                 return RedirectToAction("listarUsuarios");
             }
         }
@@ -110,10 +115,12 @@ namespace AppCuidandoPatitas.Controllers
 
             if (respuesta)
             {
+                TempData["SuccessMessage"] = "Exito - Usuario editado exitosamente.";
                 return RedirectToAction("listarUsuarios");
             }
             else
             {             
+                TempData["SuccessMessage"] = "Error - Error al editar el usuario.";
                 return View();
             }
         }
