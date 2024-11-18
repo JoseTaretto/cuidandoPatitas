@@ -67,11 +67,12 @@ namespace AppCuidandoPatitas.Controllers
 
             if (respuesta != 0)
             {
-                return traerMascotas();
+                TempData["SuccessMessage"] = "Se solicito la adopcion.";
+                return RedirectToAction("traerMascotas");
             }
             else
             {
-                 return traerMascotas(); //ENTRA AL ELSE POR EL USER ID
+                return RedirectToAction("traerMascotas");
             }                 
         }
 
