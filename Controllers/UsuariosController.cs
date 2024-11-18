@@ -39,15 +39,12 @@ namespace AppCuidandoPatitas.Controllers
         {
             var respuesta = DatosUsuarios.Guardar(objUsuario);
 
-            if(respuesta == true)
-            {
-                TempData["SuccessMessage"] = "Exito - Usuario " + objUsuario.UsuarioUserName + " ingresado exitosamente.";
-
+            if(respuesta == true)            
+            {               
                 return RedirectToAction("listarUsuarios");
             }
             else
-            {
-                TempData["SuccessMessage"] = "Error - Error al ingresar el usuario.";
+            {             
                 return View();
             }
         }
@@ -116,12 +113,12 @@ namespace AppCuidandoPatitas.Controllers
             if (respuesta)
             {
                 TempData["SuccessMessage"] = "Exito - Usuario editado exitosamente.";
-                return RedirectToAction("listarUsuarios");
+                return RedirectToAction("ListarUsuarios");
             }
             else
             {             
                 TempData["SuccessMessage"] = "Error - Error al editar el usuario.";
-                return View();
+                return RedirectToAction("ListarUsuarios");
             }
         }
     }

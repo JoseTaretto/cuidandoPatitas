@@ -15,12 +15,14 @@ namespace AppCuidandoPatitas.Controllers
         {
             DocumentoAnimal = 2
         }
+
         [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         public IActionResult traerMascotas()
         {
             var listaAnimales = DatosAnimales.Listar();
             return View("ListarAnimales", listaAnimales);
         }
+
         [Authorize(Roles = "cp_admin, cp_rescatista")]
         public IActionResult vistaIngresarMascota()
         {
