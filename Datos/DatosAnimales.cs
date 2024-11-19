@@ -30,7 +30,7 @@ namespace AppCuidandoPatitas.Datos
                                 AnimalSexo = Convert.ToChar(dr["ANIMAL_SEXO"]),
                                 Adoptado = Convert.ToInt32(dr["adoptado"]),
                                 AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString(), 
-                                AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"]),
+                                AnimalEstadoId = Convert.ToInt32(dr["ANIMAL_ESTADO"]),
                                 imagen = dr["imagen"].ToString()
                             });                        }
                     }
@@ -56,7 +56,7 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("ANIMAL_FECHA_NACIMIENTO", objMascota.AnimalFechaNacimiento);
                     cmd.Parameters.AddWithValue("ANIMAL_PESO", objMascota.AnimalPeso);
                     cmd.Parameters.AddWithValue("ANIMAL_CASTRADO", objMascota.AnimalCastrado);
-                    cmd.Parameters.AddWithValue("ANIMAL_ESTADO", objMascota.AnimalEstado);
+                    cmd.Parameters.AddWithValue("ANIMAL_ESTADO", objMascota.AnimalEstadoId);
                     cmd.Parameters.AddWithValue("ANIMAL_DESCRIPCION", objMascota.AnimalDescripcion);
                     cmd.Parameters.AddWithValue("DOCUMENTO_ID", objMascota.DocumentoID);
                     cmd.Parameters.AddWithValue("ANIMAL_DOCUMENTO", objMascota.AnimalDocumento);
@@ -219,7 +219,7 @@ namespace AppCuidandoPatitas.Datos
                             objAnimal.AnimalDocumento = dr["ANIMAL_DOCUMENTO"].ToString();
                             objAnimal.AnimalDescripcion = dr["ANIMAL_DESCRIPCION"].ToString();
                             objAnimal.Adoptado = Convert.ToInt32(dr["ADOPTADO"]);
-                            objAnimal.AnimalEstado = Convert.ToInt32(dr["ANIMAL_ESTADO"]);
+                            objAnimal.AnimalEstadoId = Convert.ToInt32(dr["ANIMAL_ESTADO"]);
                             objAnimal.imagen = dr["imagen"].ToString();
                            
                         }

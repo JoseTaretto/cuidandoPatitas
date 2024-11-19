@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authentication.Cookies;
+@using System.Security.Claims;
 @model List<ModelUsuarios>
 
 @{
@@ -12,7 +13,7 @@
     <div class="card">
 
         <div class="card-header">
-            <h1 class="text-center">Listar Usuarios</h1>
+            <h1 class="text-center">LISTA DE USUARIOS</h1>
             @if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
             {
                 <div id="successAlert" class="alert text-center" style="display:none;">
@@ -30,6 +31,7 @@
                             <th scope="col">USER</th>
                             <th scope="col">NOMBRE</th>
                             <th scope="col">APELLIDO</th>
+                            <th scope="col">ROL</th>
                             <th scope="col" class="text-end">ACCIONES</th>
                         </tr>
                     </thead>
@@ -40,6 +42,18 @@
                                 <th scope="row">@item.UsuarioUserName</th>
                                 <td>@item.UsuarioNombre</td>
                                 <td>@item.UsuarioApellido</td>
+                                @if (item.UsuarioRol.Equals("cp_admin"))
+                                {
+                                    <td>ADMINISTRADOR</td>
+                                }
+                                else if (item.UsuarioRol.Equals("cp_rescatista"))
+                                {
+                                    <td>RESCATISTA</td>
+                                }
+                                else if (item.UsuarioRol.Equals("cp_adoptante"))
+                                {
+                                     <td>ADOPTANTE</td>
+                                }
                                 <td>
                                     <div class="d-flex justify-content-end gap-2">
                                         <form asp-controller="Usuarios" asp-action="TraerUsuario">
@@ -48,7 +62,7 @@
                                                 <span class="material-symbols-outlined">visibility</span>
                                             </button>
                                         </form>
-                                        @if (User.IsInRole("cp_admin"))
+                                        @if (User.IsInRole("cp_admin") || Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value) == item.UsuarioID)
                                         {
                                             <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
                                                 <input type="hidden" name="id" value="@item.UsuarioID" />
@@ -56,7 +70,10 @@
                                                     <span class="material-symbols-outlined">edit</span>
                                                 </button>
                                             </form>
+                                        }
 
+                                        @if (User.IsInRole("cp_admin"))
+                                        {
                                             <form asp-controller="Usuarios" asp-action="DesactivarUser">
                                                 <input type="hidden" name="id" value="@item.UsuarioID" />                               
                                                 <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">

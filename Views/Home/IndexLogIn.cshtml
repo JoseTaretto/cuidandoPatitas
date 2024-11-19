@@ -2,22 +2,21 @@
 @using Microsoft.AspNetCore.Authentication.Cookies;
 
 @{
-    ViewData["Title"] = "IndexLogIn";
+    ViewData["Title"] = "HOME INDEX";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container" style="display: flex; flex-wrap: wrap; justify-content: start; gap: 10px; margin-top: 20px;">
 
-
-        @if (User.IsInRole("cp_admin"))
-        {
-            <a class="btn btn-primary btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Usuarios" asp-action="ListarUsuarios">
-                <h2 class="text-center">
-                    LISTA DE<br>
-                    USUARIOS
-                </h2>
-            </a>
-        }
+    @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
+    {
+        <a class="btn btn-primary btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Usuarios" asp-action="ListarUsuarios">
+            <h2 class="text-center">
+                LISTA DE<br>
+                USUARIOS
+            </h2>
+        </a>
+    }
 
     @if (User.IsInRole("cp_admin"))
     {
@@ -29,28 +28,26 @@
         </a>
     }
 
-        @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
-        {
-            <a class="btn btn-success btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Animales" asp-action="traerMascotas">
-                <h2>
-                    LISTA DE<br>
-                    PATITAS 🐾
-                </h2>                
-            </a>         
-        }
+    @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista") || User.IsInRole("cp_adoptante"))
+    {
+        <a class="btn btn-success btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Animales" asp-action="traerMascotas">
+            <h2>
+                LISTA DE<br>
+                PATITAS 🐾
+            </h2>
+        </a>
+    }
 
-        @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
-        {
+    @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
+    {
 
-            <a class="btn btn-warning btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Animales" asp-action="vistaIngresarMascota">
-                <h2>
-                    INGRESAR<br>
-                    PATITA 🐾
-                </h2>   
-            </a>
-        }
-
-
+        <a class="btn btn-warning btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Animales" asp-action="vistaIngresarMascota">
+            <h2>
+                INGRESAR<br>
+                PATITA 🐾
+            </h2>
+        </a>
+    }
 
 </div>
 

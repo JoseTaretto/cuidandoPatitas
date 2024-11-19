@@ -24,7 +24,6 @@ namespace AppCuidandoPatitas.Controllers
             return View(listaUsuarios);
         }
 
-
         public IActionResult NuevoUsuario()
         {
             var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoHumano);
@@ -84,6 +83,7 @@ namespace AppCuidandoPatitas.Controllers
                 return RedirectToAction("listarUsuarios");
             }
         }
+
         [Authorize(Roles = "cp_admin, cp_rescatista, cp_adoptante")]
         public IActionResult EditarUsuarioView(int id)
         {
@@ -121,5 +121,8 @@ namespace AppCuidandoPatitas.Controllers
                 return RedirectToAction("ListarUsuarios");
             }
         }
+
+
+
     }
 }

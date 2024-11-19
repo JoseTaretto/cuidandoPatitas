@@ -27,6 +27,10 @@
             <div class="col-md-4">
                 <label for="rol" class="form-label">Rol</label>               
                 <select asp-for="UsuarioRol" class="form-select" id="documento" required>
+                    @if (User.IsInRole("cp_admin"))
+                    {
+                        <option value="cp_admin">ADMINISTRADOR</option>
+                    }
                     <option value="cp_adoptante">ADOPTANTE</option>
                     <option value="cp_rescatista">RESCATISTA</option>
                 </select>

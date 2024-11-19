@@ -10,6 +10,8 @@ namespace AppCuidandoPatitas.Controllers
     {
         readonly DatosAnimales DatosAnimales = new();
         readonly DatosDocumento DatosDocumento = new();
+        readonly DatosEspecie DatosEspecie = new();
+        readonly DatosAnimalEstado DatosAnimalEstado = new();
 
         public enum TipoDocumento
         {
@@ -26,6 +28,10 @@ namespace AppCuidandoPatitas.Controllers
         [Authorize(Roles = "cp_admin, cp_rescatista")]
         public IActionResult vistaIngresarMascota()
         {
+            ViewBag.ListaEspecie = DatosEspecie.Listar();
+            ViewBag.ListaDocumento = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoAnimal);
+            ViewBag.ListaAnimalEstado = DatosAnimalEstado.Listar();
+
             return View(); 
         }
 
@@ -39,11 +45,11 @@ namespace AppCuidandoPatitas.Controllers
                 // Si hay una foto, la guardamos en la carpeta raíz
                 objMascota.UserAlta = Convert.ToInt32(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                 var respuesta = DatosAnimales.Guardar(objMascota, imagen);
+
                 if (respuesta == true)
                 {
                     TempData["SuccessMessage"] = "La mascota se ingresó correctamente.";
                     return RedirectToAction("traerMascotas");
-
                 }
                 else
                 {
@@ -93,6 +99,7 @@ namespace AppCuidandoPatitas.Controllers
                 return View();
             }                 
         }
+
         [Authorize(Roles = "cp_admin, cp_rescatista")]
         [HttpPost]
         public IActionResult actualizarMascota(ModelAnimales objAnimal)
@@ -108,15 +115,18 @@ namespace AppCuidandoPatitas.Controllers
                 return traerMascotas();
             }                 
         }
+
         [Authorize(Roles = "cp_admin, cp_rescatista")]
         public IActionResult modificarAnimalVista(int animalId)
         {
             var mascota = DatosAnimales.TraerUno(animalId);
 
             if(mascota != null)
-            {
-                var listaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoAnimal);
-                ViewBag.ListaDocumentos = listaDocumentos;
+            {               
+                ViewBag.ListaEspecie = DatosEspecie.Listar();
+                ViewBag.ListaDocumentos = DatosDocumento.ListarDocumento((int)TipoDocumento.DocumentoAnimal);
+                ViewBag.ListaAnimalEstado = DatosAnimalEstado.Listar();
+
                 return View(mascota);
             }
             else
@@ -124,5 +134,6 @@ namespace AppCuidandoPatitas.Controllers
                 return RedirectToAction("traerMascotas");
             }
         }
+
     }
 }

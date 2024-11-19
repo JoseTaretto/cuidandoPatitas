@@ -1,14 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authentication.Cookies;
-
+@using AppCuidandoPatitas.Models;
 @model ModelAnimales
 
 @{
     ViewData["Title"] = "Modificar Mascota";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var errorDetails = TempData["ErrorDetails"] as string;
-    var modelErrors = TempData["ModelErrors"] as List<string>;
+    Layout = "~/Views/Shared/_Layout.cshtml";   
 }
 
 <div class="card">
@@ -17,15 +14,15 @@
 
             <input asp-for="AnimalId" type="hidden" class="form-control"> <!-- Valor por defecto -->
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label for="especieId" class="form-label">Especie</label>
-                <input asp-for="EspecieId" type="number" class="form-control" id="especieId" value="1" required> <!-- Valor por defecto -->
-            </div>
-
-            <div class="col-md-4">
-                <label for="razaId" class="form-label">Raza</label>
-                <input asp-for="RazaId" type="number" class="form-control" id="razaId" value="1" required> <!-- Valor por defecto -->
-            </div>
+                <select asp-for="EspecieId" class="form-select" id="especie" required>
+                    @foreach (var especie in ViewBag.ListaEspecie)
+                    {
+                        <option value="@especie.EspecieId">@especie.EspecieNombre</option>
+                    }
+                </select>
+            </div>           
 
             <div class="col-md-4">
                 <label for="animalNombre" class="form-label">Nombre del Animal</label>
@@ -67,7 +64,12 @@
 
             <div class="col-md-4">
                 <label for="animalEstado" class="form-label">Estado</label>
-                <input asp-for="AnimalEstado" type="number" class="form-control" id="animalEstado" value="1" required> <!-- Valor por defecto -->
+                <select asp-for="AnimalEstadoId" class="form-select" id="especie" disabled>
+                    @foreach (var animalEstado in ViewBag.ListaAnimalEstado)
+                    {
+                        <option value="@animalEstado.AnimalEstadoId">@animalEstado.AnimalEstadoNombre</option>
+                    }
+                </select>
             </div>
 
             <div class="col-md-4">

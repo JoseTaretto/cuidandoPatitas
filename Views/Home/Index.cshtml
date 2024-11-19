@@ -1,7 +1,7 @@
 ﻿@model ModelHome
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "INDEX";
     Layout = "~/Views/Shared/_Layout.cshtml"; // Asegúrate de que este sea el layout que estás utilizando, si aplica
 }
 
@@ -361,35 +361,40 @@
 <!-- end client section -->
 <!-- map section -->
 
-<section class="map_section">
-    <div id="map" class="h-100 w-100 ">
-    </div>
+<section class="map_section">    
     <div class="form_container ">
         <div class="row">
-            <div class="col-md-8 col-sm-10 offset-md-4">
-                <form asp-action="GuardarMensaje" asp-controller="Home" method="post">
+            <div class="col-md-10 col-sm-10 offset-md-6">
+                <form asp-action="GuardarMensaje" asp-controller="Home" method="post" class="rounded border border-secondary">
+
                     <div class="text-center">
                         <h3>
                             Contáctenos
                         </h3>
                     </div>
+
                     <div>
                         <input asp-for="MensajeNombre" type="text" placeholder="Nombre" class="pt-3" required>
-                    </div>                    
+                    </div>           
+                    
                     <div> 
                         <input asp-for="MensajeMail" type="email" placeholder="Correo electrónico" required>
                     </div>
+
                     <div>
                         <input asp-for="MensajeTelefono" type="text" placeholder="Asunto" required>
                     </div>
+
                     <div>
                         <input asp-for="MensajeMensaje" type="text" class="message-box" placeholder="Mensaje" required>
                     </div>
+
                     <div class="d-flex justify-content-center">
                         <button type="submit">
                             ENVIAR
                         </button>
                     </div>
+
                 </form>
             </div>
         </div>

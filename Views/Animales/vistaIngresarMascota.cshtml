@@ -1,49 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Authentication.Cookies;
+@using AppCuidandoPatitas.Models;
 @model ModelAnimales
 
 @{
     ViewData["Title"] = "Nuevo Animal";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var errorDetails = TempData["ErrorDetails"] as string;
-    var modelErrors = TempData["ModelErrors"] as List<string>;
-}
-
-@if (!string.IsNullOrEmpty(errorMessage))
-{
-    <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Error!</h4>
-        <p>@errorMessage</p>
-        <hr />
-        @if (!string.IsNullOrEmpty(errorDetails))
-        {
-            <p class="mb-0">@errorDetails</p>
-        }
-        <ul>
-            @if (modelErrors != null)
-            {
-                @foreach (var error in modelErrors)
-                {
-                    <li>@error</li>
-                }
-            }
-        </ul>
-    </div>
+    Layout = "~/Views/Shared/_Layout.cshtml";   
 }
 
 <div class="card">
-    <form asp-action="ingresarMascota" asp-controller="Animales" method="post" enctype="multipart/form-data">
+
+    <div class="card-header">
+        <h1 class="text-center">LISTA DE USUARIOS</h1>
+       
+    </div>
+
+    <div class="card-body">
+        <form asp-action="ingresarMascota" asp-controller="Animales" method="post" enctype="multipart/form-data">
         <div class="row g-3 align-items-center p-3 fw-bold">
 
             <div class="col-md-2">
                 <label for="especieId" class="form-label">Especie</label>
-                <input asp-for="EspecieId" type="number" class="form-control" id="especieId" value="1" required> <!-- Valor por defecto -->
+                <select asp-for="EspecieId" class="form-select" id="especie" required>
+                    @foreach (var especie in ViewBag.ListaEspecie)
+                    {
+                        <option value="@especie.EspecieId">@especie.EspecieNombre</option>
+                    }
+                </select>
             </div>           
 
             <div class="col-md-3">
                 <label for="animalNombre" class="form-label">Nombre del Animal</label>
-                <input asp-for="AnimalNombre" type="text" class="form-control" id="animalNombre" maxlength="30" value="Nombre por defecto" required> <!-- Valor por defecto -->
+                <input asp-for="AnimalNombre" type="text" class="form-control" id="animalNombre" maxlength="30" placeholder="Ingrese un nombre" required> <!-- Valor por defecto -->
             </div>
 
             <div class="col-md-3">
@@ -67,12 +55,12 @@
 
             <div class="col-md-2">
                 <label for="animalFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                <input asp-for="AnimalFechaNacimiento" type="date" class="form-control" id="animalFechaNacimiento" value="@DateTime.Now" required> <!-- Valor por defecto -->
+                <input asp-for="AnimalFechaNacimiento" type="date" class="form-control" id="animalFechaNacimiento" placeholder="@DateTime.Today" required> <!-- Valor por defecto -->
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <label for="animalPeso" class="form-label">Peso</label>
-                <input asp-for="AnimalPeso" type="number" class="form-control" id="animalPeso" value="10.000" required> <!-- Valor por defecto -->
+                <input asp-for="AnimalPeso" type="number" class="form-control" id="animalPeso" placeholder="10.000" required> <!-- Valor por defecto -->
             </div>
 
             <div class="col-md-2">
@@ -86,12 +74,22 @@
 
             <div class="col-md-2">
                 <label for="animalEstado" class="form-label">Estado</label>
-                <input asp-for="AnimalEstado" type="number" class="form-control" id="animalEstado" value="1" required> <!-- Valor por defecto -->
+                <select asp-for="AnimalEstadoId" class="form-select" id="especie" disabled>
+                    @foreach (var animalEstado in ViewBag.ListaAnimalEstado)
+                    {
+                        <option value="@animalEstado.AnimalEstadoId">@animalEstado.AnimalEstadoNombre</option>
+                    }
+                </select>
             </div>
 
             <div class="col-md-2">
                 <label for="documentoId" class="form-label">Tipo Documento</label>
-                <input asp-for="DocumentoID" type="number" class="form-control" id="documentoId" value="1" required> <!-- Valor por defecto -->
+                <select asp-for="DocumentoID" class="form-select" id="documento" required>
+                    @foreach (var doc in ViewBag.ListaDocumento)
+                    {
+                        <option value="@doc.DocumentoID">@doc.DocumentoNombre</option>
+                    }
+                </select>
             </div>
 
             <div class="col-md-2">
@@ -105,7 +103,7 @@
             </div>
 
             <div class="col-md-6">
-                <button type="submit" class="btn btn-primary mb-4 fw-bold">Registrar</button>
+                <button type="submit" class="btn btn-primary mb-4 fw-bold">AGREGAR <br /> PATITA 🐾</button>
             </div>
         </div>
     </form>
