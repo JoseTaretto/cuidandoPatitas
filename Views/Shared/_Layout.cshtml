@@ -71,11 +71,11 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
-                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Usuarios" asp-action="TraerUsuario" asp-route-id="@Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value)" asp- style="background-color: transparent !important;"><b>MI PERFIL</b></a>
+                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Usuarios" asp-action="TraerUsuario" asp-route-id="@Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value)"><b>MI PERFIL</b></a>
 
                                     </li>
                                     <li>
-                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Acceso" asp-action="Salir" style="background-color: transparent !important;"><b>SALIR</b></a>
+                                        <a class="dropdown-item text-dark" style="--bs-link-hover-color-rgb: 25, 135, 84;" asp-area="" asp-controller="Acceso" asp-action="Salir"><b>SALIR</b></a>
                                     </li>
                                 </ul>
                             </li>

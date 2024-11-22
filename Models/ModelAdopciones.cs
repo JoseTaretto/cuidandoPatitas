@@ -26,7 +26,7 @@ namespace AppCuidandoPatitas.Models
         public int AdopcionesId { get => _adopciones_id; set => _adopciones_id = value; }
         public int UsuarioId { get => _usuario_id; set => _usuario_id = value; }
         public int AnimalId { get => _animal_id; set => _animal_id = value; }
-        public int AdopcionEstado { get => _adopcion_estado; set => _adopcion_estado = value; }
+        public int AdopcionEstadoId { get => _adopcion_estado; set => _adopcion_estado = value; }
         public string AdopcionObservaciones { get => _adopcion_observaciones; set => _adopcion_observaciones = value; }
         public DateTime FechaAlta { get => _fecha_alta; set => _fecha_alta = value; }
         public int UserAlta { get => _user_alta; set => _user_alta = value; }

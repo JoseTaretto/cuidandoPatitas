@@ -96,7 +96,7 @@
 
         <div class="col-md-2">
             <label for="localidad" class="form-label">Localidad</label>
-            <select asp-for="LocalidadId" class="form-select" class="form-control" id="localidad" placeholder="Ingrese su localidad" disabled>
+            <select asp-for="LocalidadId" class="form-select" id="localidad" placeholder="Ingrese su localidad" disabled>
                 <option value="1">Ituzaingo</option>
                 <option value="2">Morón</option>
                 <option value="3">Moreno</option>
@@ -108,9 +108,11 @@
         </div>
 
         <div class="col-md-6">
-            <button type="button" class="btn btn-lg" style="background-color: #ff6f61; border-color: #e15a44; color: white; font-weight: bold;">
-                <a class="text-white" asp-area="" asp-controller="Usuarios" asp-action="EditarUsuarioView" asp-route-id="@Model.UsuarioId" style="text-decoration: none;">EDITAR USUARIO</a>
-            </button>
+            <a class="text-white" asp-area="" asp-controller="Usuarios" asp-action="EditarUsuarioView" asp-route-id="@Model.UsuarioId" style="text-decoration: none;">
+                <button type="button" class="btn btn-lg" style="background-color: #ff6f61; border-color: #e15a44; color: white; font-weight: bold;">
+                EDITAR USUARIO
+                </button>
+            </a>
         </div>
     </div>
 </div>
