@@ -23,7 +23,7 @@ namespace AppCuidandoPatitas.Datos
                     {
                         listaUsuarios.Add(new ModelUsuarios()
                         {
-                            UsuarioID = Convert.ToInt32(dr["USER_ID"]),
+                            UsuarioId = Convert.ToInt32(dr["USER_ID"]),
                             UsuarioUserName = dr["USER_NAME"].ToString(),
                             UsuarioRol = dr["USUARIO_ROL"].ToString(),
                             UsuarioPassword = dr["USUARIO_PASSWORD"].ToString(),
@@ -154,7 +154,7 @@ namespace AppCuidandoPatitas.Datos
                     {
                         if (dr.Read())
                         {
-                            objUsuario.UsuarioID = Convert.ToInt32(dr["USER_ID"]);
+                            objUsuario.UsuarioId = Convert.ToInt32(dr["USER_ID"]);
                             objUsuario.UsuarioUserName = dr["USER_NAME"].ToString();
                             objUsuario.UsuarioRol = dr["USUARIO_ROL"].ToString();
                             objUsuario.UsuarioPassword = dr["USUARIO_PASSWORD"].ToString();
@@ -204,7 +204,7 @@ namespace AppCuidandoPatitas.Datos
                     conexcion.Open();
                     SqlCommand cmd = new SqlCommand("ModificarUsuario", conexcion);
 
-                    cmd.Parameters.AddWithValue("@USER_ID", objUsuarios.UsuarioID);
+                    cmd.Parameters.AddWithValue("@USER_ID", objUsuarios.UsuarioId);
                     cmd.Parameters.AddWithValue("USER_NAME", objUsuarios.UsuarioUserName);
                     cmd.Parameters.AddWithValue("USUARIO_PASSWORD", objUsuarios.UsuarioPassword);
                     cmd.Parameters.AddWithValue("USUARIO_ROL", objUsuarios.UsuarioRol);

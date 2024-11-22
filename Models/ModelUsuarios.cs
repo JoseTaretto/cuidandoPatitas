@@ -1,7 +1,9 @@
 ﻿
+using AppCuidandoPatitas.Interface;
+
 namespace AppCuidandoPatitas.Models
 {
-    public class ModelUsuarios
+    public class ModelUsuarios : IUsuario
     {
         // Atributos privados
         private int _usuario_id;
@@ -29,7 +31,7 @@ namespace AppCuidandoPatitas.Models
         private int _user_baja;
 
         // Propiedades Publicas
-        public int UsuarioID { get => _usuario_id; set => _usuario_id = value; }
+        public int UsuarioId { get => _usuario_id; set => _usuario_id = value; }
         public string UsuarioUserName { get => _usuario_user_name; set => _usuario_user_name = value; }
         public string UsuarioPassword { get => _usuario_password; set => _usuario_password = value; }
         public string UsuarioRol { get => _usuario_rol; set => _usuario_rol = value; }
