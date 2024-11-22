@@ -228,22 +228,25 @@
         ❤ Últimos Rescataditos ❤
     </h2>
     </div>
-    <div class="container ">
-        <div class="img_box box-1">
-            <img src="images/g-1.png" alt="">
-        </div>
-        <div class="img_box box-2">
-            <img src="images/g-2.png" alt="">
-        </div>
-        <div class="img_box box-3">
-            <img src="images/g-3.png" alt="">
-        </div>
-        <div class="img_box box-4">
-            <img src="images/g-4.png" alt="">
-        </div>
-        <div class="img_box box-5">
-            <img src="images/g-5.png" alt="">
-        </div>
+    <div class="container">
+        @if (Model.ListaRescatados != null && Model.ListaRescatados.Any())
+        {
+            int counter = 1;
+            <!-- Para asignar dinámicamente box-1, box-2, etc. -->
+            foreach (var animal in Model.ListaRescatados)
+            {
+                <div class="img_box box-@counter">
+                    <img src="@animal.imagen" alt="@animal.AnimalNombre" />
+                </div>
+                counter++;
+                if (counter > 5) break;
+                <!-- Mostrar solo las primeras 5 imágenes -->
+            }
+        }
+        else
+        {
+            <p>No hay animales rescatados en este momento.</p>
+        }
     </div>
 </section>
 
@@ -281,69 +284,24 @@
                 <li data-target="#carouselExample2Indicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="layout_padding2 pl-100">
-                        <div class="client_container ">
-                            <div class="img_box">
-                                <img src="images/client.jpg" alt="">
-                            </div>
-                            <div class="detail_box">
-                                <h5>
-                                    Sandy Mark
-                                </h5>
-                                <p>
-                                    ¡Hoy ha sido un día increíble! Finalmente adopté a un gatito, y ya siento que mi vida ha cambiado completamente. Lo llamé "Luna", y es una bolita de peluche llena de energía. Al principio estaba un poco asustado, pero ahora está explorando toda la casa con mucha curiosidad. Me encanta ver cómo se acomoda en los rincones, dando saltos pequeños como si estuviera descubriendo un nuevo mundo. Su ronroneo es lo más tierno, me tiene completamente enamorado. ¡No puedo esperar para pasar más tiempo con él y verlo crecer!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="layout_padding2 pl-100">
-                        <div class="client_container ">
-                            <div class="img_box">
-                                <img src="images/client.jpg" alt="">
-                            </div>
-                            <div class="detail_box">
-                                <h5>
-                                    Sandy Mark
-                                </h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                    et
-                                    dolore
-                                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea
-                                    commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                </p>
+                @for (int i = 0; i < Model.ListaAdoptados.Count; i++)
+                {
+                    var adoptado = Model.ListaAdoptados[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="layout_padding2 pl-100">
+                            <div class="client_container">
+                                <div class="img_box">
+                                    <img src="@adoptado.imagen" alt="@adoptado.AnimalNombre" style="max-width: 25px; width: auto; height: auto;">
+                                </div>
+                                <div class="detail_box">
+                                    <h5>@adoptado.AnimalNombre</h5>
+                                    <p>@adoptado.AnimalDescripcion</p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="layout_padding2 pl-100">
-                        <div class="client_container ">
-                            <div class="img_box">
-                                <img src="images/client.jpg" alt="">
-                            </div>
-                            <div class="detail_box">
-                                <h5>
-                                    Sandy Mark
-                                </h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                    et
-                                    dolore
-                                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea
-                                    commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
 
         </div>

@@ -170,7 +170,6 @@ namespace AppCuidandoPatitas.Datos
                     cmd.Parameters.AddWithValue("animal_descripcion", objAnimal.AnimalDescripcion);
                     cmd.Parameters.AddWithValue("animal_documento", objAnimal.AnimalDocumento);
                     cmd.Parameters.AddWithValue("documento_id", objAnimal.DocumentoID);
-                    cmd.Parameters.AddWithValue("imagen", objAnimal.imagen);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }

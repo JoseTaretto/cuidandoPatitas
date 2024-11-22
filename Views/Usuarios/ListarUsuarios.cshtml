@@ -9,22 +9,17 @@
 }
 
 <div class="container">
-    
+
     <div class="card">
 
         <div class="card-header">
             <h1 class="text-center">LISTA DE USUARIOS</h1>
-            @if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
-            {
-                <div id="successAlert" class="alert text-center" style="display:none;">
-                    @TempData["SuccessMessage"]
-                </div>
-            }
+
         </div>
 
-        <div class="card-body">          
+        <div class="card-body">
 
-            <div class="table-responsive">  
+            <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -52,7 +47,7 @@
                                 }
                                 else if (item.UsuarioRol.Equals("cp_adoptante"))
                                 {
-                                     <td>ADOPTANTE</td>
+                                    <td>ADOPTANTE</td>
                                 }
                                 <td>
                                     <div class="d-flex justify-content-end gap-2">
@@ -75,7 +70,7 @@
                                         @if (User.IsInRole("cp_admin"))
                                         {
                                             <form asp-controller="Usuarios" asp-action="DesactivarUser">
-                                                <input type="hidden" name="id" value="@item.UsuarioId" />                               
+                                                <input type="hidden" name="id" value="@item.UsuarioId" />
                                                 <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
                                                     <span class="material-symbols-outlined">delete</span>
                                                 </button>
@@ -92,6 +87,7 @@
     </div>
 
 </div>
+
 
 
 <script src="~/js/mensaje-success.js"></script>
