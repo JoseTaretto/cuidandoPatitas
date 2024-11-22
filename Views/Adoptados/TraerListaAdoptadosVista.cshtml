@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@using System.Security.Claims;
+@model List<ModelAdopciones>
+
+@{
+    ViewData["Title"] = "TraerListaAdoptadosVista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="text-center">LISTA DE ADOPCIONES</h1>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">ADOPTANTE</th>
+                            <th scope="col">PATITA</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col" class="text-end">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.UsuarioUserName</th>
+                                <td>@item.AnimalNombre</td>  
+                                @if (item.AdopcionEstadoId == 1)
+                                {
+                                    <td>ADOPCION PENDIENTE</td>
+                                } 
+                                else 
+                                {
+                                    <td>ADOPCION CONFIRMADA</td>
+                                }
+                                
+                               
+                                <td>
+                                    <div class="d-flex justify-content-end gap-2">                                       
+                                        @if ((User.IsInRole("cp_admin") && item.AdopcionEstadoId == 1) || (Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value) == item.UsuarioId && item.AdopcionEstadoId == 1))
+                                        {
+                                            <form asp-controller="Adoptados" asp-action="AceptarAdopcion">
+                                                <input type="hidden" name="id" value="@item.AdopcionesId" />
+                                                <button type="submit" class="btn btn-outline-primary btn-sm" title="Editar Usuario">
+                                                    <span class="material-symbols-outlined">pets</span>
+                                                </button>
+                                            </form>
+                                        }
+
+                                        @if ((User.IsInRole("cp_admin") && item.AdopcionEstadoId == 1) || (Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value) == item.UsuarioId && item.AdopcionEstadoId == 1))
+                                        {
+                                            <form asp-controller="Adoptados" asp-action="DeclinarAdopcion">
+                                                <input type="hidden" name="id" value="@item.AdopcionesId" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
+                                                    <span class="material-symbols-outlined">delete</span>
+                                                </button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
