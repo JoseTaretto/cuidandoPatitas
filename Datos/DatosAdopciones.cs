@@ -27,7 +27,7 @@ namespace AppCuidandoPatitas.Datos
                                 AnimalNombre = dr["ANIMAL_NOMBRE"].ToString(),
                                 UsuarioUserName = dr["USUARIO_NOMBRE"].ToString(),
                                 AdopcionEstadoId = Convert.ToInt32(dr["ESTADO_ADOPCION_ID"])
-                               
+
                             });
                         }
                     }
@@ -47,7 +47,7 @@ namespace AppCuidandoPatitas.Datos
                 var conexion = new SqlConnection(con.GetCadenaSQL());
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("AceptarAdopcion", conexion);
-                cmd.Parameters.AddWithValue("@adopcionId", adopcionId); 
+                cmd.Parameters.AddWithValue("@adopcionId", adopcionId);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
 

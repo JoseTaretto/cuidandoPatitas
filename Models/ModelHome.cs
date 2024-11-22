@@ -13,5 +13,10 @@ namespace AppCuidandoPatitas.Models
         public string MensajeTelefono { get => _mensaje_telefono; set => _mensaje_telefono = value; }
         public string MensajeMail { get => _mensaje_mail; set => _mensaje_mail = value; }
         public string MensajeMensaje { get => _mensaje_mensaje; set => _mensaje_mensaje = value; }
+
+
+        // Propidedades de navegacion
+        public List<ModelAnimales> ListaRescatados;
+        public List<ModelAnimales> ListaAdoptados;
     }
 }

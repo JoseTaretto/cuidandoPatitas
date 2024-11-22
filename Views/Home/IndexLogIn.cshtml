@@ -49,6 +49,18 @@
         </a>
     }
 
+    @if (User.IsInRole("cp_admin") || User.IsInRole("cp_rescatista"))
+    {
+
+        <a class="btn btn-warning btn-lg" style="width: 230px; padding: 2%;" asp-area="" asp-controller="Adoptados" asp-action="TraerListaAdoptadosVista">
+            <h2>
+                LISTA DE<br>
+                ADOPCIONES
+            </h2>
+        </a>
+    }
+
+
 </div>
 
 

@@ -40,5 +40,59 @@ namespace AppCuidandoPatitas.Datos
             return respuesta;
 
         }
+
+        public List<ModelAnimales> ListarRescatados()
+        {
+            {
+                var listaAnimales = new List<ModelAnimales>();
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.GetCadenaSQL());
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("TraerAnimalesRescatados", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    var dr = cmd.ExecuteReader();
+                    {
+                        while (dr.Read())
+                        {
+                            listaAnimales.Add(new ModelAnimales()
+                            {
+                                AnimalNombre = dr["ANIMAL_NOMBRE"].ToString(),
+                                imagen = dr["imagen"].ToString()
+                            });
+                        }
+                    }
+                }
+                return listaAnimales;
+            }
+        }
+
+        public List<ModelAnimales> ListarAdoptados()
+        {
+            {
+                var listaAnimales = new List<ModelAnimales>();
+                var con = new Conexion();
+                var conexion = new SqlConnection(con.GetCadenaSQL());
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("TraerAnimalesAdoptados", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    var dr = cmd.ExecuteReader();
+                    {
+                        while (dr.Read())
+                        {
+                            listaAnimales.Add(new ModelAnimales()
+                            {
+                                AnimalNombre = dr["ANIMAL_NOMBRE"].ToString(),
+                                imagen = dr["imagen"].ToString(),
+                                AnimalDescripcion = dr["ADOPCION_OBSERVACIONES"].ToString()
+                            });
+                        }
+                    }
+                }
+                return listaAnimales;
+            }
+        }
+
     }
 }

@@ -17,9 +17,13 @@ namespace AppCuidandoPatitas.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }     
-        
+            ModelHome modelHome = new();
+            modelHome.ListaRescatados = datosHome.ListarRescatados();
+            modelHome.ListaAdoptados = datosHome.ListarAdoptados();
+
+            return View(modelHome);
+        }
+
         public IActionResult IndexLogIn()
         {
             return View();
