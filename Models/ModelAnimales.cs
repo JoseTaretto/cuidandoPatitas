@@ -2,7 +2,7 @@
 
 namespace AppCuidandoPatitas.Models
 {
-   public class ModelAnimales : IDocumento, IEspecie, IAnimalEstado
+   public class ModelAnimales : IDocumento, IEspecie, IAnimalEstado, IAnimal
     {   
         // ESTRUCTURA TABLA
         private int _animal_id;

@@ -27,7 +27,7 @@ namespace AppCuidandoPatitas.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usuario.UsuarioUserName),
-                    new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioID.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
                     new Claim(ClaimTypes.Role, usuario.UsuarioRol)                 
 
                 };

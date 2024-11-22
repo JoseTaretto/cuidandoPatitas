@@ -14,7 +14,7 @@ namespace AppCuidandoPatitas.Datos
             var conexion = new SqlConnection(con.GetCadenaSQL());
             {
                 conexion.Open();
-                SqlCommand cmd = new("TraerListaDocumentos", conexion)
+                SqlCommand cmd = new("TRAER_LISTA_ANIMAL_ESTADO", conexion)
                 {
                     CommandType = CommandType.StoredProcedure
                 };

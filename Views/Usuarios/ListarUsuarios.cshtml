@@ -57,15 +57,15 @@
                                 <td>
                                     <div class="d-flex justify-content-end gap-2">
                                         <form asp-controller="Usuarios" asp-action="TraerUsuario">
-                                            <input type="hidden" name="id" value="@item.UsuarioID" />
+                                            <input type="hidden" name="id" value="@item.UsuarioId" />
                                             <button type="submit" class="btn btn-outline-success btn-sm" title="Ver Usuario">
                                                 <span class="material-symbols-outlined">visibility</span>
                                             </button>
                                         </form>
-                                        @if (User.IsInRole("cp_admin") || Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value) == item.UsuarioID)
+                                        @if (User.IsInRole("cp_admin") || Convert.ToInt32(@User.FindFirst(ClaimTypes.NameIdentifier)?.Value) == item.UsuarioId)
                                         {
                                             <form asp-controller="Usuarios" asp-action="EditarUsuarioView">
-                                                <input type="hidden" name="id" value="@item.UsuarioID" />
+                                                <input type="hidden" name="id" value="@item.UsuarioId" />
                                                 <button type="submit" class="btn btn-outline-warning btn-sm" title="Editar Usuario">
                                                     <span class="material-symbols-outlined">edit</span>
                                                 </button>
@@ -75,7 +75,7 @@
                                         @if (User.IsInRole("cp_admin"))
                                         {
                                             <form asp-controller="Usuarios" asp-action="DesactivarUser">
-                                                <input type="hidden" name="id" value="@item.UsuarioID" />                               
+                                                <input type="hidden" name="id" value="@item.UsuarioId" />                               
                                                 <button type="submit" class="btn btn-outline-danger btn-sm" title="Desactivar Usuario">
                                                     <span class="material-symbols-outlined">delete</span>
                                                 </button>
